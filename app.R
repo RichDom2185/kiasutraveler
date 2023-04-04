@@ -18,7 +18,7 @@ ui <- app(
         column(
             box(
                 style = "width: fit-content",
-                appTitle("Taxi Availability Data in Singapore")
+                appTitle("kiasutraveler")
             ),
             box(
                 style = "width: fit-content; position: absolute; bottom: 0; right: 0",

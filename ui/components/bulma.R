@@ -14,12 +14,14 @@ app <- function(...) {
 
 # Simple Bulma wrappers
 appTitle <- function(...) p(class = "title", ...)
-box <- function(...) div(class = "box  my-5 mx-4", ...)
+box <- function(..., class = "") div(class = paste("box my-5 mx-4", class), ...)
 columns <- function(...) div(class = "columns", ...)
 column <- function(...) div(class = "column", ...)
 
 
-tabs <- function(id, ...) div(class = "tabs is-toggle is-centered", tags$ul(id = id, ...))
+tabs <- function(id, ..., class = "") {
+    div(class = paste("tabs is-toggle is-centered", class), tags$ul(id = id, ...))
+}
 tab <- function(id, title, class = "", ...) {
     tags$li(id = id, class = class, a(
         onClick = paste0("Shiny.setInputValue('activeTab', '", id, "')"), title, ...
