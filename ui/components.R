@@ -4,7 +4,7 @@ app <- function(...) {
             tags$link(rel = "stylesheet", type = "text/css", href = "reset_bootstrap.css"),
             tags$link(rel = "stylesheet", type = "text/css", href = "bulma.min.css")
         ),
-        div(class = "root", ...)
+        div(class = "root py-5 px-4", ...)
     )
 }
 
