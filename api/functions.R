@@ -3,6 +3,25 @@ library(jsonlite)
 
 source("api/routes.R")
 
+# Ideally, we should use a parameter instead of a global flag,
+# but this is done to simplify the function call signature.
+setApiMode <- function(type) {
+    types <- c("manual", "auto")
+    if (!(type %in% types)) {
+        warning("Invalid type value, defaulting to auto")
+        type <- "auto"
+    }
+    if (type == "manual") {
+        globals.api_handle_url <<- function(url) {
+            httr::content(httr::GET(url))
+        }
+    } else if (type == "auto") {
+        globals.api_handle_url <<- jsonlite::fromJSON
+    }
+}
+
+globals.api_handle_url <- setApiMode("auto")
+
 
 ##########################################
 # Using API_ENDPOINT_FORWARD_GEOCODE_URL
@@ -10,8 +29,7 @@ source("api/routes.R")
 getCoordinatesFromAddress <- function(address) {
     url <- API_ENDPOINT_FORWARD_GEOCODE_URL
     params <- list(address = address)
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 
@@ -21,8 +39,7 @@ getCoordinatesFromAddress <- function(address) {
 getAddressFromCoordinates <- function(lat, lng) {
     url <- API_ENDPOINT_REVERSE_GEOCODE_URL
     params <- list(lat = lat, lng = lng)
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 
@@ -38,8 +55,7 @@ getGrabServicesAvailability <- function(startLat, startLng, endLat, endLng) {
         endLat = endLat,
         endLng = endLng
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 getTaxiAvailability <- function() {
@@ -47,8 +63,7 @@ getTaxiAvailability <- function() {
     params <- list(
         serviceType = "taxi"
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 
@@ -64,8 +79,7 @@ getCyclingDirections <- function(startLat, startLng, endLat, endLng) {
         endLng = endLng,
         mode = "cycle"
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 getDrivingDirections <- function(startLat, startLng, endLat, endLng) {
@@ -77,8 +91,7 @@ getDrivingDirections <- function(startLat, startLng, endLat, endLng) {
         endLng = endLng,
         mode = "drive"
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 getWalkingDirections <- function(startLat, startLng, endLat, endLng) {
@@ -90,8 +103,7 @@ getWalkingDirections <- function(startLat, startLng, endLat, endLng) {
         endLng = endLng,
         mode = "walk"
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 getPublicTransportDirections <- function(startLat, startLng, endLat, endLng, date, time) {
@@ -106,8 +118,7 @@ getPublicTransportDirections <- function(startLat, startLng, endLat, endLng, dat
         time = time,
         vehicleType = "TRANSIT"
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 
