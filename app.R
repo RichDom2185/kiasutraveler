@@ -1,25 +1,31 @@
 library(shiny)
+library(mapboxer)
 
 source("ui/components.R")
+source("logic/maps/maps.R")
 
 ui <- app(
-    div(class = "box", "test"),
+    appTitle("Taxi Availability Data in Singapore"),
     box(
-        input.text("pickUp", "Enter pick-up location...", label = "From:"),
-        input.text("dropOff", "Enter destination location...", label = "To:")
-    ),
-    textInput("input_id", NULL, "value"),
-    # textOutput("description"),
-    htmlOutput("description"),
+        strong("Taxi Availability Data:"),
+        mapboxerOutput("map")
+    )
 )
 
 server <- function(input, output) {
-    output$description <- renderText(paste(
-        "Searching for directions from",
-        strong(input$pickUp),
-        "to",
-        strong(input$dropOff)
-    ))
+    getSingaporeMap <- reactive(
+        mapboxer(
+            style = getBasemap(),
+            center = COORDINATES_SINGAPORE,
+            zoom = 10,
+            pitch = 15,
+            minZoom = 7
+        )
+    )
+
+    output$map <- renderMapboxer(
+        getSingaporeMap()
+    )
 }
 
 shinyApp(ui, server, options = list(
