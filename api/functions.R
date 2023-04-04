@@ -4,10 +4,10 @@ source("api/routes.R")
 
 
 API_ENDPOINT_FORWARD_GEOCODE_URL
-getAddressFromCoordinates <- function(lat, lng) {} # TODO:
+getCoordinatesFromAddress <- function(address) {} # TODO:
 
 API_ENDPOINT_REVERSE_GEOCODE_URL
-getCoordinatesFromAddress <- function(address) {} # TODO:
+getAddressFromCoordinates <- function(lat, lng) {} # TODO:
 
 API_ENDPOINT_RIDES_AVAILABILITY_URL
 getGrabServicesAvailability <- function(startLat, startLng, endLat, endLng) {} # TODO:
