@@ -17,39 +17,57 @@ ui <- app(
         mapboxerOutput("map", height = "100vh"),
         column(
             box(
-                style = "width: fit-content",
+                style = "width: fit-content; position: absolute; top: 0; left: 0;",
                 appTitle("kiasutraveler")
             ),
             box(
+                style = "width: fit-content; position: absolute; right: 0; top: 0",
+                class = "py-3 px-3",
+                tabs(
+                    "transportModes",
+                    # TODO: Fix IDs and add reactivity
+                    tab("grab", "Grab"),
+                    tab("taxi", "Taxi"),
+                    tab("pt", "Public Transport"),
+                )
+            ),
+            box(
                 style = "width: fit-content; position: absolute; bottom: 0; right: 0",
-                columns(
-                    column(
-                        dateInput(
-                            inputId = "date",
-                            label = "Select Date:",
-                            format = "yyyy-mm-dd"
+                conditionalPanel(
+                    condition = "input.activeTab == 'taxi'",
+                    columns(
+                        column(
+                            dateInput(
+                                inputId = "date",
+                                label = "Select Date:",
+                                format = "yyyy-mm-dd"
+                            ),
+                            timeInput(
+                                inputId = "time",
+                                label = "Select Time:",
+                                value = as_hms(Sys.time())
+                            )
                         ),
-                        timeInput(
-                            inputId = "time",
-                            label = "Select Time:",
-                            value = as_hms(Sys.time())
+                        column(
+                            radioButtons(
+                                inputId = "layer",
+                                label = "Select Map Type:",
+                                choices = c("Point", "Heatmap")
+                            ),
+                            selectInput(
+                                inputId = "mapType",
+                                label = "Select Base Map Style:",
+                                choices = basemap_types,
+                                selected = "voyager"
+                            )
                         )
                     ),
-                    column(
-                        radioButtons(
-                            inputId = "layer",
-                            label = "Select Map Type:",
-                            choices = c("Point", "Heatmap")
-                        ),
-                        selectInput(
-                            inputId = "mapType",
-                            label = "Select Base Map Style:",
-                            choices = basemap_types,
-                            selected = "voyager"
-                        )
-                    )
+                    htmlOutput("description")
                 ),
-                htmlOutput("description")
+                conditionalPanel(
+                    condition = "input.activeTab !== 'taxi'",
+                    p("Coming soon!")
+                )
             )
         )
     )
