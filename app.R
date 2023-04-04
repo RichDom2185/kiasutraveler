@@ -47,6 +47,7 @@ ui <- app(
 
 server <- function(input, output) {
     data <- reactive({
+        # TODO: Remove this in production
         print("Firing API call...")
         fromJSON(formatUrl(input, "date", "time"))
     })
