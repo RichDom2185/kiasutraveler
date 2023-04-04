@@ -10,6 +10,11 @@ app <- function(...) {
 
 box <- function(...) div(class = "box", ...)
 
+appTitle <- function(...) p(class = "title", ...)
+
+columns <- function(...) div(class = "columns", ...)
+column <- function(...) div(class = "column", ...)
+
 input.text <- function(id, placeholder = NULL, value = "", label = NULL) {
     div(
         class = "field",
