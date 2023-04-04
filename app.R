@@ -4,7 +4,7 @@ library(shiny)
 library(shinyTime)
 library(mapboxer)
 
-source("ui/components.R")
+source("ui/components/bulma.R")
 source("logic/maps/maps.R")
 
 ui <- app(
