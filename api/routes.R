@@ -1,0 +1,22 @@
+# TODO: Use environment variables
+# Change this to reflect the correct hostname
+API_HOSTNAME_URL <- "http://localhost:3000"
+
+API_ROUTE_GEOCODE <- "/geocode"
+API_ROUTE_RIDES <- "/ride_hailing"
+API_ROUTE_ROUTES <- "/routes"
+API_ROUTE_TRAFFIC <- "/traffic"
+
+# Geocode API Endpoints
+API_ENDPOINT_FORWARD_GEOCODE_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_GEOCODE, "/forward")
+API_ENDPOINT_REVERSE_GEOCODE_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_GEOCODE, "/reverse")
+
+# Rides API Endpoints
+API_ENDPOINT_RIDES_AVAILABILITY_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_RIDES, "/")
+
+# Routes API Endpoints
+API_ENDPOINT_ROUTES_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_ROUTES, "/")
+
+# Traffic API Endpoints
+API_ENDPOINT_TRAFFIC_INCIDENTS_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_TRAFFIC, "/incidents")
+API_ENDPOINT_TRAFFIC_DENSITY_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_TRAFFIC, "/density")
