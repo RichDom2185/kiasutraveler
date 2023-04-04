@@ -1,3 +1,5 @@
+library(shiny)
+
 app <- function(...) {
     fillPage(
         tags$head(
