@@ -56,6 +56,24 @@ appTab <- function(title, ...) {
     )
 }
 
+stackElements <- function(...) {
+    elems <- list(...)
+    list(
+        tags$style(HTML("
+        div.stack-container {
+            display: grid;
+        }
+        div.stack-container > * {
+            grid-area: 1/1;
+        }
+        ")),
+        tags$div(class = "stack-container", lapply(seq_along(elems), function(i) {
+            css <- paste0("height: min-content; z-index: ", i)
+            tags$div(style = css, elems[[i]])
+        }))
+    )
+}
+
 # Custom inputs
 input.text <- function(id, placeholder = NULL, value = "", label = NULL) {
     div(

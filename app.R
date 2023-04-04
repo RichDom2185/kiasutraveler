@@ -13,16 +13,15 @@ options(shiny.autoreload = TRUE)
 
 ui <- app(
     useShinyjs(),
-    appTabs(
-        id = "appTabs",
-        appTab(
-            "Home",
-            appTitle("Welcome to kiasutraveler")
-        ),
-        appTab(
-            "Taxis",
-            appTitle("Taxi Availability Data in Singapore"),
+    stackElements(
+        mapboxerOutput("map", height = "100vh"),
+        column(
             box(
+                style = "width: fit-content",
+                appTitle("Taxi Availability Data in Singapore")
+            ),
+            box(
+                style = "width: fit-content; position: absolute; bottom: 0; right: 0",
                 columns(
                     column(
                         dateInput(
@@ -51,10 +50,6 @@ ui <- app(
                     )
                 ),
                 htmlOutput("description")
-            ),
-            box(
-                strong("Taxi Availability Data:"),
-                mapboxerOutput("map")
             )
         )
     )
@@ -105,7 +100,7 @@ server <- function(input, output) {
     ))
 
     output$map <- renderMapboxer({
-        mapbox <- getSingaporeMap() %>% add_navigation_control()
+        mapbox <- getSingaporeMap() %>% add_navigation_control(pos = "bottom-left")
         if (input$layer == "Heatmap") {
             mapbox <- mapbox %>%
                 add_layer(
