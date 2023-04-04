@@ -1,6 +1,7 @@
 library(hms)
 library(jsonlite)
 library(shiny)
+library(shinyjs)
 library(shinyTime)
 library(mapboxer)
 
@@ -11,44 +12,63 @@ source("logic/maps/maps.R")
 options(shiny.autoreload = TRUE)
 
 ui <- app(
-    appTitle("Taxi Availability Data in Singapore"),
-    box(
-        columns(
-            column(
-                dateInput(
-                    inputId = "date",
-                    label = "Select Date:",
-                    format = "yyyy-mm-dd"
-                ),
-                timeInput(
-                    inputId = "time",
-                    label = "Select Time:",
-                    value = as_hms(Sys.time())
-                )
-            ),
-            column(
-                radioButtons(
-                    inputId = "layer",
-                    label = "Select Map Type:",
-                    choices = c("Point", "Heatmap")
-                ),
-                selectInput(
-                    inputId = "mapType",
-                    label = "Select Base Map Style:",
-                    choices = basemap_types,
-                    selected = "voyager"
-                )
-            )
+    useShinyjs(),
+    appTabs(
+        id = "appTabs",
+        appTab(
+            "Home",
+            appTitle("Welcome to kiasutraveler")
         ),
-        htmlOutput("description")
-    ),
-    box(
-        strong("Taxi Availability Data:"),
-        mapboxerOutput("map")
+        appTab(
+            "Taxis",
+            appTitle("Taxi Availability Data in Singapore"),
+            box(
+                columns(
+                    column(
+                        dateInput(
+                            inputId = "date",
+                            label = "Select Date:",
+                            format = "yyyy-mm-dd"
+                        ),
+                        timeInput(
+                            inputId = "time",
+                            label = "Select Time:",
+                            value = as_hms(Sys.time())
+                        )
+                    ),
+                    column(
+                        radioButtons(
+                            inputId = "layer",
+                            label = "Select Map Type:",
+                            choices = c("Point", "Heatmap")
+                        ),
+                        selectInput(
+                            inputId = "mapType",
+                            label = "Select Base Map Style:",
+                            choices = basemap_types,
+                            selected = "voyager"
+                        )
+                    )
+                ),
+                htmlOutput("description")
+            ),
+            box(
+                strong("Taxi Availability Data:"),
+                mapboxerOutput("map")
+            )
+        )
     )
 )
 
 server <- function(input, output) {
+    # Set up custom tab pages
+    currentActiveTab <- reactiveVal()
+    observeEvent(input$activeTab, {
+        removeCssClass(id = currentActiveTab(), class = "is-active")
+        currentActiveTab(input$activeTab)
+        addCssClass(id = currentActiveTab(), class = "is-active")
+    })
+
     data <- reactive({
         # TODO: Remove this in production
         print("Firing API call...")
