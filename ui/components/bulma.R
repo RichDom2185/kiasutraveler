@@ -10,13 +10,15 @@ app <- function(...) {
     )
 }
 
-box <- function(...) div(class = "box", ...)
 
+# Simple Bulma wrappers
 appTitle <- function(...) p(class = "title", ...)
-
+box <- function(...) div(class = "box", ...)
 columns <- function(...) div(class = "columns", ...)
 column <- function(...) div(class = "column", ...)
 
+
+# Custom inputs
 input.text <- function(id, placeholder = NULL, value = "", label = NULL) {
     div(
         class = "field",
