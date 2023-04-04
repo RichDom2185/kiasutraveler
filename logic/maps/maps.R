@@ -1,5 +1,7 @@
 library(mapboxer)
 
+source("logic/maps/functions.R")
+
 mapbox_basemap_types <- names(basemaps$Mapbox) # Requires API key
 carto_basemap_types <- names(basemaps$Carto)
 
