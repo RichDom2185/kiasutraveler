@@ -7,14 +7,14 @@ app <- function(...) {
             tags$link(rel = "stylesheet", type = "text/css", href = "reset_bootstrap.css"),
             tags$link(rel = "stylesheet", type = "text/css", href = "bulma.min.css")
         ),
-        div(class = "root py-5 px-4", ...)
+        div(class = "root", ...)
     )
 }
 
 
 # Simple Bulma wrappers
 appTitle <- function(...) p(class = "title", ...)
-box <- function(...) div(class = "box", ...)
+box <- function(...) div(class = "box  my-5 mx-4", ...)
 columns <- function(...) div(class = "columns", ...)
 column <- function(...) div(class = "column", ...)
 
