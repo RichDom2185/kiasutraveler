@@ -4,8 +4,11 @@ library(shiny)
 library(shinyTime)
 library(mapboxer)
 
+source("api/functions.R")
 source("ui/components/bulma.R")
 source("logic/maps/maps.R")
+
+options(shiny.autoreload = TRUE)
 
 ui <- app(
     appTitle("Taxi Availability Data in Singapore"),
