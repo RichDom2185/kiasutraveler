@@ -155,8 +155,7 @@ getBusPassengerDensity <- function() {
     params <- list(
         type = "bus"
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 # FIXME: `time` parameter is not used yet
@@ -166,8 +165,7 @@ getMrtPlatformDensity <- function(mrtLine, time) {
         type = "platform",
         mrt = mrtLine
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 
