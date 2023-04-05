@@ -13,10 +13,18 @@ app <- function(...) {
 
 
 # Simple Bulma wrappers
-appTitle <- function(...) p(class = "title", ...)
-box <- function(..., class = "") div(class = paste("box my-5 mx-4", class), ...)
-columns <- function(...) div(class = "columns", ...)
-column <- function(...) div(class = "column", ...)
+appTitle <- function(..., class = "") {
+    p(class = paste("title", class), ...)
+}
+box <- function(..., class = "") {
+    div(class = paste("box my-5 mx-4", class), ...)
+}
+columns <- function(..., class = "") {
+    div(class = paste("columns", class), ...)
+}
+column <- function(..., class = "") {
+    div(class = paste("column", class), ...)
+}
 
 
 tabs <- function(id, ..., class = "") {
