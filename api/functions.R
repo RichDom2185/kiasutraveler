@@ -22,6 +22,21 @@ setApiMode <- function(type) {
 
 globals.api_handle_url <- setApiMode("auto")
 
+##########################################
+# Using API_ENDPOINT_CARS_AVAILABILITY_URL
+##########################################
+getAvailableBluesgStations <- function() {
+    url <- API_ENDPOINT_CARS_AVAILABILITY_URL
+    params <- list(serviceType = "bluesg")
+    globals.api_handle_url(modify_url(url, query = params))
+}
+
+getAvailableGetgoVehicles <- function() {
+    url <- API_ENDPOINT_CARS_AVAILABILITY_URL
+    params <- list(serviceType = "getgo")
+    globals.api_handle_url(modify_url(url, query = params))
+}
+
 
 ##########################################
 # Using API_ENDPOINT_FORWARD_GEOCODE_URL

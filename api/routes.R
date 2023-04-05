@@ -2,10 +2,14 @@
 # Change this to reflect the correct hostname
 API_HOSTNAME_URL <- "http://localhost:3000"
 
+API_ROUTE_CARS <- "/cars"
 API_ROUTE_GEOCODE <- "/geocode"
 API_ROUTE_RIDES <- "/ride_hailing"
 API_ROUTE_ROUTES <- "/routes"
 API_ROUTE_TRAFFIC <- "/traffic"
+
+# Cars API Endpoints
+API_ENDPOINT_CARS_AVAILABILITY_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_CARS, "/")
 
 # Geocode API Endpoints
 API_ENDPOINT_FORWARD_GEOCODE_URL <- paste0(API_HOSTNAME_URL, API_ROUTE_GEOCODE, "/forward")
