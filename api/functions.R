@@ -169,3 +169,37 @@ getMrtPlatformDensity <- function(mrtLine, time) {
     response <- GET(url, query = params)
     content(response)
 }
+
+
+##########################################
+# Using API_ENDPOINT_RAINFALL_DATA_URL
+##########################################
+getRainfall <- function(date = NULL, time = NULL) {
+    # Using default argument values to suport both
+    # realtime data and historical data
+    url <- API_ENDPOINT_RAINFALL_DATA_URL
+    if (!is.null(date)) {
+        url <- modify_url(url, query = list(date = date))
+    }
+    if (!is.null(time)) {
+        url <- modify_url(url, query = list(time = time))
+    }
+    globals.api_handle_url(url)
+}
+
+
+##########################################
+# Using API_ENDPOINT_WEATHER_FORECAST_URL
+##########################################
+getWeatherForecast <- function(date = NULL, time = NULL) {
+    # Using default argument values to suport both
+    # realtime data and historical data
+    url <- API_ENDPOINT_WEATHER_FORECAST_URL
+    if (!is.null(date)) {
+        url <- modify_url(url, query = list(date = date))
+    }
+    if (!is.null(time)) {
+        url <- modify_url(url, query = list(time = time))
+    }
+    globals.api_handle_url(url)
+}
