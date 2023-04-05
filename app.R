@@ -28,6 +28,7 @@ ui <- app(
                     # TODO: Fix IDs and add reactivity
                     tab("grab", "Grab"),
                     tab("taxi", "Taxi"),
+                    tab("getgo", "Getgo"),
                     tab("pt", "Public Transport"),
                 )
             ),
