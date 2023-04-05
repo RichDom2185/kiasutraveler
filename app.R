@@ -18,7 +18,7 @@ ui <- app(
         column(
             box(
                 style = "width: fit-content; position: absolute; top: 0; left: 0;",
-                appTitle("kiasutraveler Lets go")
+                appTitle("kiasutraveler")
             ),
             box(
                 style = "width: fit-content; position: absolute; right: 0; top: 0",
