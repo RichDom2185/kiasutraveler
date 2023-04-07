@@ -1,6 +1,6 @@
 # TODO: Use environment variables
 # Change this to reflect the correct hostname
-API_HOSTNAME_URL <- "http://localhost:3000"
+API_HOSTNAME_URL <- "https://kiasutraveler-api.onrender.com"
 
 API_ROUTE_GEOCODE <- "/geocode"
 API_ROUTE_RIDES <- "/ride_hailing"
