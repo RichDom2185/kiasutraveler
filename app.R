@@ -26,10 +26,11 @@ ui <- app(
                 tabs(
                     "transportModes",
                     # TODO: Fix IDs and add reactivity
-                    tab("grab", "Grab"),
+                    tab("ridehailing", "Ride Hailing"),
+                    tab("carsharing", "Car-Sharing"),
                     tab("taxi", "Taxi"),
-                    tab("getgo", "Getgo"),
                     tab("pt", "Public Transport"),
+                    tab("otherinsights", "Other Insights")
                 )
             ),
             box(
