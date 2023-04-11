@@ -4,6 +4,14 @@ library(shiny)
 library(shinyjs)
 library(shinyTime)
 library(mapboxer)
+library(bslib)
+library(dplyr)
+library(httr)
+library(jsonlite)
+library(ggplot2)
+library(mapboxer)
+library(sf)
+library(wordcloud)
 
 source("api/functions.R")
 source("ui/components/bulma.R")
@@ -11,7 +19,12 @@ source("logic/maps/maps.R")
 
 options(shiny.autoreload = TRUE)
 
-ui <- navbarPage("Kiasu Traveler",
+theme <- bs_theme(
+  bg = "#0171bb", fg = "#FDf7f7", primary = "#FCC780",
+  base_font = font_google("Lato")
+)
+
+ui <- navbarPage(theme = theme,  title= div(img(src = "Kiasu Traveler", height = "40px", width = "40px"), "Kiasu Traveler"),
   tabPanel("Ride Hailing", plotOutput("ridehailing")),
   tabPanel("Car Sharing", plotOutput("carsharing")),
   tabPanel("Taxi",
@@ -106,19 +119,38 @@ ui <- navbarPage("Kiasu Traveler",
                         )),
                tabPanel("Traffic Incidents",
                         tabsetPanel(
-                          tabPanel("Wordcloud", 
-                                   sidebarLayout(
-                                     sidebarPanel("explanation"),
-                                     mainPanel(plotOutput("wordcloud")))),
-                          tabPanel("Incident Causes Today", 
-                                   sidebarLayout(
-                                     sidebarPanel(
-                                       "explanation"
+                          tabPanel("Wordcloud",
+                                   fluidPage(
+                                   sidebarLayout(position = "right",
+                                     sidebarPanel(width = 7,
+                                       h2("Traffic Incident Causes in Singapore"), br(),
+                                       p("The following wordcloud illustrates some of the most common traffic incident causes in Singapore from 2012 to 2018. 
+                                         The most common cause appears to be Diversion and Accidents"), br(),
+                                       p("Incidents categorised under 'Diversion' include 'Turning / Changing Lanes without Due Care'."), br(),
+                                       p("Incidents categorised under 'Accidents' include 'Disobeying Traffic Signals' or 'Failing to give way to a pedestrian'."), br(),
+                                       p("Take account of these statistics when you are on the road!")
                                      ),
-                                     mainPanel(plotOutput("incidentbar"))
-                                   )),
-                          tabPanel("Incident Map Today", mapboxerOutput("incident_map", height = "100vh")))
-               ))
+                                     mainPanel(width = 5, plotOutput("wordcloud"))))),
+                          tabPanel("Live Incident Causes", 
+                                   fluidPage(
+                                     sidebarLayout(
+                                     sidebarPanel(width = 6,
+                                               h1("Live Traffic Incident Causes"), br(),
+                                               p("The bar graph illustrates live traffic incident causes right now. The data is updated every two minutes."),
+                                               br(),
+                                               p("Observe the various incidents happening now to get a better idea of the road congestion situation."),
+                                               p("Click on the 'Live Traffic Incidents' tab to find out where these incidents occured!"), br(),
+                                               p(paste(
+                                                   "Getting traffic incident information on", format(Sys.Date(), "%A, %B %d, %Y"), 
+                                                   "at",format(Sys.time(), "%I:%M %p"), "..."
+                                                 ))),
+                                     mainPanel(width = 6, plotOutput("incidentbar"))
+                                   ))),
+                          tabPanel("Live Traffic Incidents", 
+                                   stackElements(mapboxerOutput("incident_map", height = "100vh"),
+                                                 box(style = "width: fit-content; position: absolute; bottom: 0; right: 0",
+                                                     column(htmlOutput("trafficincident_description")))))
+               )))
 
 )
 
@@ -196,7 +228,7 @@ server <- function(input, output) {
         
     })
     
-    
+    # Other Insights => Traffic Incidents => Word Cloud
     output$wordcloud <- renderPlot({
       traffic_data <- read.csv("causes-of-accidents-by-severity-of-injury-sustained.csv")
       names(traffic_data)[names(traffic_data) == "causes_of_accident"] <- "C"
@@ -231,10 +263,12 @@ server <- function(input, output) {
       names(traffic_wordcloud)[names(traffic_wordcloud) == "C"] <- "Causes"
       #traffic_wordcloud$Causes
       
-      set.seed(1234)
-      wordcloud(words = traffic_wordcloud$Causes, freq = traffic_wordcloud$count, min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35, colors=brewer.pal(8, "RdBu"))
-    })
-    
+      set.seed(1000)
+      wordcloud(words = traffic_wordcloud$Causes, freq = traffic_wordcloud$count, min.freq = 1, max.words=200, 
+                random.order=FALSE, rot.per=0.35, colors=brewer.pal(8, "RdBu"))
+      })
+
+    # Other Insights => Traffic Incidents => Bar graph
     output$incidentbar <- renderPlot({
       #Import API
       api_key <- "REDACTED"
@@ -256,9 +290,12 @@ server <- function(input, output) {
       
       traffic_count_live <- ggplot(traffic_counted2) + geom_bar(aes(x = value.Type, y = Count), stat = 'identity', fill = "#0171bb") + geom_text(aes(label = Count, x = value.Type, y = Count), vjust = -0.2, colour = "black")
       
-      traffic_count_live + theme_classic() + labs(title = "Traffic Incidents Today", x = "Type of Incident", y = "Number of Accidents") + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+      traffic_count_live + theme_classic() + labs(title = "Live Traffic Incidents", x = "Type of Incident", y = "Number of Accidents") + theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size= 20, face = "bold"))
     })
     
+    
+    
+    # Other Insights => Traffic Incidents => Incident Map Plot
     output$incident_map <- renderMapboxer({
       #Import API
       api_key <- "REDACTED"
@@ -282,6 +319,18 @@ server <- function(input, output) {
           circle_color = "#0171bb",
           popup = "<p>{{message}}</p>"
         )
+    })
+    
+    output$trafficincident_description <- renderText({
+      date <- format(Sys.Date(), "%A, %B %d, %Y")  # current date
+      time <- format(Sys.time(), "%I:%M %p")  # current time
+      paste(
+        "Getting traffic incident information on",
+        "<b>", date, "</b>",
+        "at",
+        "<b>", time, "</b>",
+        "..."
+      )
     })
     
     
