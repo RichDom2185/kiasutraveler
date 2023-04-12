@@ -24,7 +24,7 @@ theme <- bs_theme(
   base_font = font_google("Lato")
 )
 
-ui <- navbarPage(theme = theme,  title= div(img(src = "Kiasu Traveler", height = "40px", width = "40px"), "Kiasu Traveler"),
+ui <- navbarPage(theme = theme, title = div(img(src = 'https://drive.google.com/file/d/1wHxSPAEbzlrN2s1Y-1Wn_HidsE9ixFAb/view?usp=sharing'), "Kiasu Traveler"),
   tabPanel("Ride Hailing", plotOutput("ridehailing")),
   tabPanel("Car Sharing", plotOutput("carsharing")),
   tabPanel("Taxi",
@@ -110,12 +110,14 @@ ui <- navbarPage(theme = theme,  title= div(img(src = "Kiasu Traveler", height =
     navbarMenu("Other insights", 
                tabPanel("Weather",
                         tabsetPanel(
-                          tabPanel("2 hour forecast", plotOutput("2hourforecast"))
+                          tabPanel("2 hour forecast", plotOutput("2hourforecast")),
+                          tabPanel("Historical Rainfall Plot", plotOutput("historical_rainfall_plot")),
+                          tabPanel("Live Rainfall Map", mapboxerOutput("rainfall_map", height = "100vh"))
                         )),
                tabPanel("Crowd",
                         tabsetPanel(
-                          tabPanel("Bus Volume", plotOutput("busvolume")),
-                          tabPanel("MRT Volume", plotOutput("MRT Volume"))
+                          tabPanel("Bus Crowd", plotOutput("busVolume")),
+                          tabPanel("MRT Crowd", plotOutput("mrtVolume"))
                         )),
                tabPanel("Traffic Incidents",
                         tabsetPanel(
@@ -123,7 +125,7 @@ ui <- navbarPage(theme = theme,  title= div(img(src = "Kiasu Traveler", height =
                                    fluidPage(
                                    sidebarLayout(position = "right",
                                      sidebarPanel(width = 7,
-                                       h2("Traffic Incident Causes in Singapore"), br(),
+                                       h2("Traffic Incident Causes in Singapore", style = "font-weight:bold; font-size:20px;"), br(),
                                        p("The following wordcloud illustrates some of the most common traffic incident causes in Singapore from 2012 to 2018. 
                                          The most common cause appears to be Diversion and Accidents"), br(),
                                        p("Incidents categorised under 'Diversion' include 'Turning / Changing Lanes without Due Care'."), br(),
@@ -135,7 +137,7 @@ ui <- navbarPage(theme = theme,  title= div(img(src = "Kiasu Traveler", height =
                                    fluidPage(
                                      sidebarLayout(
                                      sidebarPanel(width = 6,
-                                               h1("Live Traffic Incident Causes"), br(),
+                                               h1("Live Traffic Incident Causes", style = "font-weight:bold; font-size:20px;"), br(),
                                                p("The bar graph illustrates live traffic incident causes right now. The data is updated every two minutes."),
                                                br(),
                                                p("Observe the various incidents happening now to get a better idea of the road congestion situation."),
@@ -143,7 +145,7 @@ ui <- navbarPage(theme = theme,  title= div(img(src = "Kiasu Traveler", height =
                                                p(paste(
                                                    "Getting traffic incident information on", format(Sys.Date(), "%A, %B %d, %Y"), 
                                                    "at",format(Sys.time(), "%I:%M %p"), "..."
-                                                 ))),
+                                                 ), style = "font-weight:bold;")),
                                      mainPanel(width = 6, plotOutput("incidentbar"))
                                    ))),
                           tabPanel("Live Traffic Incidents", 
@@ -226,6 +228,113 @@ server <- function(input, output) {
               add_tooltips("taxis_points", "{{type}}")
           }
         
+    })
+    
+    #Other Insights => Weather => Historical Rainfall Plot
+    output$historical_rainfall_plot <- renderPlot({
+      # read the CSV file
+      rainfall <- read.csv("MonthlyRainfall.csv")
+      
+      # convert month to date format
+      rainfall$month <- as.Date(paste(rainfall$month, "-01", sep = ""), format = "%Y-%m-%d")
+      
+      # filter the data for time period from 2013 to 2022
+      rainfall <- rainfall[format(rainfall$month, "%Y") >= "2013" & format(rainfall$month, "%Y") <= "2022", ]
+      
+      # calculate average number of rainy days for each month
+      monthly_avg <- aggregate(no_of_rainy_days ~ format(month, "%b"), data = rainfall, FUN = mean)
+      
+      # rename the column names
+      colnames(monthly_avg) <- c("Month", "Average_Rainy_Days")
+      
+      # plot the monthly averages
+      ggplot(monthly_avg, aes(x = Month, y = Average_Rainy_Days, fill = Average_Rainy_Days)) + 
+        geom_bar(stat = "identity") +
+        scale_fill_gradient(low = "#0171BB", high = "#E76963") +
+        ggtitle("Average Monthly Rainy Days from 2013 to 2022") +
+        ylab("Average Number of Rainy Days") +
+        xlab("Month") +
+        theme_classic() +
+        scale_y_continuous(expand = c(0, 0)) +
+        scale_x_discrete(limits = month.abb)
+    })
+    
+    #Other Insights => Weather => Live Rainfall Map
+    output$rainfall_map <- renderMapboxer({
+      url_rainfallLive <- "https://api.data.gov.sg/v1/environment/rainfall"
+      data <- fromJSON(url_rainfallLive)
+      coordinates_rainfallLive <- as.data.frame(data$metadata$stations$location)
+      value_rainfallLive <- as.data.frame(data$items$readings[[1]]$value)
+      data_rainfallLive <- cbind(coordinates_rainfallLive, value_rainfallLive)
+      names(data_rainfallLive)[names(data_rainfallLive) == "data$items$readings[[1]]$value"] <- "rainfall"
+      data_rainfallLive$rainfall <- data_rainfallLive$rainfall * 100
+      
+      COORDINATES_SINGAPORE <- c(103.8198, 1.3521)  
+      
+      df_rain_sf <- sf::st_as_sf(
+        data_rainfallLive,
+        coords = c("longitude", "latitude"),
+        crs = 4326
+      )
+      
+      sf::sf_use_s2(TRUE)
+      
+      grid_sf <- sf::st_make_grid(df_rain_sf, square = TRUE)[df_rain_sf] %>%
+        sf::st_sf()
+      
+      grid_sf %<>% dplyr::mutate(
+        count = sapply(st_intersects(grid_sf, df_rain_sf), function(x) sum(df_rain_sf[x,]$rainfall)),
+        color = scales::col_numeric(palette = "Blues", count)(count)
+      )
+      
+      rainfall_map <- as_mapbox_source(grid_sf) %>%
+        mapboxer(style = basemaps$Carto$dark_matter, center = COORDINATES_SINGAPORE, zoom = 10,
+                 bounds = sf::st_bbox(grid_sf),
+                 fitBoundsOptions = list(padding = 20)
+        ) %>%
+        add_navigation_control() %>%
+        add_fill_layer(
+          fill_color = c("get", "color"),
+          fill_antialias = FALSE,
+          fill_opacity = 0.4,
+          popup = "Rainfall: {{count}}"
+        )
+      
+      rainfall_map
+    })
+    
+    #Other Insights => Crowd => Bus Crowd
+    output$busVolume <- renderPlot({
+      bus_psgvol <- read.csv("transport_node_bus_202302.csv")
+      grouped_bus_psgvol <- bus_psgvol %>%
+        group_by(TIME_PER_HOUR, DAY_TYPE) %>%
+        summarize(TOTAL_TAP_IN_VOLUME = sum(TOTAL_TAP_IN_VOLUME))
+      
+      busPassengerVolPlot <- ggplot(grouped_bus_psgvol, aes(x = TIME_PER_HOUR, y = TOTAL_TAP_IN_VOLUME, fill = DAY_TYPE)) +
+        geom_bar(stat = "identity", position = "dodge") +
+        facet_wrap(~DAY_TYPE, nrow = 2) +
+        labs(x = "Time in hour", y = "Total tap in volume") +
+        scale_x_continuous(breaks = seq(0, 23, 1)) + 
+        scale_y_continuous(labels = scales::comma)
+      
+      busPassengerVolPlot
+    })
+    
+    #Other Insights => Crowd => MRT Crowd
+    output$mrtVolume <- renderPlot({
+      train_psgvol <- read.csv("transport_node_train_202302.csv")
+      grouped_train_psgvol <- train_psgvol %>%
+        group_by(TIME_PER_HOUR, DAY_TYPE) %>%
+        summarize(TOTAL_TAP_IN_VOLUME = sum(TOTAL_TAP_IN_VOLUME))
+      
+      mrtPassengerVolPlot <- ggplot(grouped_train_psgvol, aes(x = TIME_PER_HOUR, y = TOTAL_TAP_IN_VOLUME, fill = DAY_TYPE)) +
+        geom_bar(stat = "identity", position = "dodge") +
+        facet_wrap(~DAY_TYPE, nrow = 2) +
+        labs(x = "Time in hour", y = "Total tap in volume") +
+        scale_x_continuous(breaks = seq(0, 23, 1)) + 
+        scale_y_continuous(labels = scales::comma)
+      
+      mrtPassengerVolPlot
     })
     
     # Other Insights => Traffic Incidents => Word Cloud
