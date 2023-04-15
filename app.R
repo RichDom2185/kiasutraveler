@@ -60,9 +60,17 @@ server <- function(input, output) {
         removeCssClass(id = currentActiveTab(), class = "is-active")
         currentActiveTab(input$activeTab)
         addCssClass(id = currentActiveTab(), class = "is-active")
-    })
 
-    updateTaxiTab(input, output)
+        switch(input$activeTab,
+            "rideHailing" = updateRideHailingTab(input, output),
+            "carSharing" = updateCarSharingTab(input, output),
+            "taxi" = updateTaxiTab(input, output),
+            "publicTransport" = updatePublicTransportTab(input, output),
+            "others" = updateOthersTab(input, output),
+            # default
+            warning("Invalid/no tab selected")
+        )
+    })
 }
 
 shinyApp(ui, server, options = list(
