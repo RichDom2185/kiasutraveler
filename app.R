@@ -9,6 +9,9 @@ source("api/functions.R")
 source("ui/components/bulma.R")
 source("logic/maps/maps.R")
 
+# Must come after the libraries are imported
+source("ui/pages/taxi.R")
+
 options(shiny.autoreload = TRUE)
 
 ui <- app(
@@ -35,37 +38,7 @@ ui <- app(
             ),
             box(
                 style = "width: fit-content; position: absolute; bottom: 0; right: 0",
-                conditionalPanel(
-                    condition = "input.activeTab == 'taxi'",
-                    columns(
-                        column(
-                            dateInput(
-                                inputId = "date",
-                                label = "Select Date:",
-                                format = "yyyy-mm-dd"
-                            ),
-                            timeInput(
-                                inputId = "time",
-                                label = "Select Time:",
-                                value = as_hms(Sys.time())
-                            )
-                        ),
-                        column(
-                            radioButtons(
-                                inputId = "layer",
-                                label = "Select Map Type:",
-                                choices = c("Point", "Heatmap")
-                            ),
-                            selectInput(
-                                inputId = "mapType",
-                                label = "Select Base Map Style:",
-                                choices = basemap_types,
-                                selected = "voyager"
-                            )
-                        )
-                    ),
-                    htmlOutput("description")
-                ),
+                taxiTabContent,
                 conditionalPanel(
                     condition = "input.activeTab !== 'taxi'",
                     p("Coming soon!")
