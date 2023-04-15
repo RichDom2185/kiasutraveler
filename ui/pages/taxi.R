@@ -34,7 +34,7 @@ taxiTabContent <- conditionalPanel(
             )
         )
     ),
-    htmlOutput("description")
+    htmlOutput("taxiDescription")
 )
 
 updateTaxiTab <- function(input, output) {
@@ -57,7 +57,7 @@ updateTaxiTab <- function(input, output) {
         return(df)
     })
 
-    output$description <- renderText(paste(
+    output$taxiDescription <- renderText(paste(
         "Getting taxi availability on",
         strong(input$date),
         "at",
