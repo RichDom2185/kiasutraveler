@@ -1,4 +1,5 @@
 library(shiny)
+library(shinyjs)
 library(shinyTime)
 library(mapboxer)
 
@@ -16,6 +17,7 @@ source("ui/pages/others.R")
 options(shiny.autoreload = TRUE)
 
 ui <- app(
+    useShinyjs(),
     setDefaultTab("activeTab", "taxi"),
     stackElements(
         mapboxerOutput("map", height = "100vh"),
