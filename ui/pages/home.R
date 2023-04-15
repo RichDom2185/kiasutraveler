@@ -76,12 +76,20 @@ updateHomeTab <- function(input, output) {
                 add_marker(
                     head(waypoints(), 1L)[1],
                     head(waypoints(), 1L)[2],
-                    popup = paste("Pick-up:", getCoordinatesFromAddress(input$pickUp)[[1]]$name)
+                    popup = paste0(
+                        strong("Start location:"),
+                        br(),
+                        getCoordinatesFromAddress(input$pickUp)[[1]]$name
+                    )
                 ) %>%
                 add_marker(
                     tail(waypoints(), 1L)[1],
                     tail(waypoints(), 1L)[2],
-                    popup = paste("Destination:", getCoordinatesFromAddress(input$dropOff)[[1]]$name)
+                    popup = paste0(
+                        strong("End location:"),
+                        br(),
+                        getCoordinatesFromAddress(input$dropOff)[[1]]$name
+                    )
                 )
         } else {
             map
