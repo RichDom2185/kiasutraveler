@@ -16,6 +16,11 @@ options(shiny.autoreload = TRUE)
 
 ui <- app(
     useShinyjs(),
+    HTML("<script defer>
+        $(document).on('shiny:connected', function() {
+            Shiny.setInputValue('activeTab', 'taxi');
+        });
+        </script>"),
     stackElements(
         mapboxerOutput("map", height = "100vh"),
         column(

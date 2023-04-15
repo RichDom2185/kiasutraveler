@@ -52,6 +52,7 @@ appTabs <- function(id, ..., selected = 1) {
             )
         }),
         useShinyjs(),
+        # TODO: Remove this old unused code
         HTML("<script defer>
         $(document).on('shiny:connected', function() {
             Shiny.setInputValue('activeTab', 'tab_1');
