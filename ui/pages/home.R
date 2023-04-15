@@ -8,7 +8,7 @@ source("logic/utils/functions.R")
 ## FUNCTIONS
 
 getBuildingNameFromPostalCode <- function(postalCode) {
-    data <- getCoordinatesFromAddress(postalCode)[[1]]
+    data <- getCoordinatesFromAddress(postalCode)$results[1, ]
     paste0(
         data$name, ", ",
         data$block, " ", data$roadName,
@@ -22,8 +22,8 @@ isValidPostalCode <- function(postalCode) {
 }
 
 getDirectionsBetweenPostalCodes <- function(fromPostalCode, toPostalCode) {
-    fromLocation <- getCoordinatesFromAddress(fromPostalCode)[[1]]
-    toLocation <- getCoordinatesFromAddress(toPostalCode)[[1]]
+    fromLocation <- getCoordinatesFromAddress(fromPostalCode)$results[1, ]
+    toLocation <- getCoordinatesFromAddress(toPostalCode)$results[1, ]
 
     result <- do.call(getDrivingDirections, list(
         fromLocation$lat,
@@ -79,7 +79,7 @@ updateHomeTab <- function(input, output) {
                     popup = paste0(
                         strong("Start location:"),
                         br(),
-                        getCoordinatesFromAddress(input$pickUp)[[1]]$name
+                        getCoordinatesFromAddress(isolate(input$pickUp))[[1]]$name
                     )
                 ) %>%
                 add_marker(
@@ -88,7 +88,7 @@ updateHomeTab <- function(input, output) {
                     popup = paste0(
                         strong("End location:"),
                         br(),
-                        getCoordinatesFromAddress(input$dropOff)[[1]]$name
+                        getCoordinatesFromAddress(isolate(input$dropOff))[[1]]$name
                     )
                 )
         } else {
