@@ -1,7 +1,9 @@
+library(jsonlite)
 library(mapboxer)
 library(shiny)
 
 source("logic/maps/maps.R")
+source("logic/utils/functions.R")
 
 ## FUNCTIONS
 
@@ -12,6 +14,24 @@ getBuildingNameFromPostalCode <- function(postalCode) {
         data$block, " ", data$roadName,
         " (", data$postalCode, ")"
     )
+}
+
+# TODO: Refactor out into utils
+isValidPostalCode <- function(postalCode) {
+    grepl("^[0-9]{6}$", postalCode)
+}
+
+getDirectionsBetweenPostalCodes <- function(fromPostalCode, toPostalCode) {
+    fromLocation <- getCoordinatesFromAddress(fromPostalCode)[[1]]
+    toLocation <- getCoordinatesFromAddress(toPostalCode)[[1]]
+
+    result <- do.call(getDrivingDirections, list(
+        fromLocation$lat,
+        fromLocation$lng,
+        toLocation$lat,
+        toLocation$lng
+    ))
+    result
 }
 
 ## UI AND LOGIC
@@ -30,9 +50,11 @@ homeTabContent <- conditionalPanel(
 )
 
 updateHomeTab <- function(input, output) {
+    waypoints <- reactiveVal(data.frame())
+
     # TODO: Refactor
     output$map <- renderMapboxer({
-        mapboxer(
+        map <- mapboxer(
             # TODO: Remove hardcoding
             style = getBasemap("voyager"),
             center = COORDINATES_SINGAPORE,
@@ -40,16 +62,24 @@ updateHomeTab <- function(input, output) {
             pitch = 15,
             minZoom = 7
         ) %>% add_navigation_control(pos = "bottom-left")
+
+        if (nrow(waypoints()) > 0) {
+            map <- map %>% add_line_layer(
+                source = waypoints() %>%
+                    points_to_lines() %>%
+                    toJSON(auto_unbox = TRUE) %>%
+                    as_mapbox_source(),
+                line_color = "red",
+                line_width = 5
+            )
+        } else {
+            map
+        }
     })
 
     output$homeDescription <- renderText({
         pickUp <- isolate(input$pickUp)
         dropOff <- isolate(input$dropOff)
-
-        # TODO: Refactor out into utils
-        isValidPostalCode <- function(postalCode) {
-            grepl("^[0-9]{6}$", postalCode)
-        }
 
         ifelse(
             input$runButton == 0,
@@ -57,12 +87,21 @@ updateHomeTab <- function(input, output) {
             ifelse(
                 !isValidPostalCode(pickUp) || !isValidPostalCode(dropOff),
                 "Please enter valid 6-digit postal codes!",
-                paste(
-                    "Searching for directions from",
-                    strong(getBuildingNameFromPostalCode(pickUp)),
-                    "to",
-                    strong(getBuildingNameFromPostalCode(dropOff))
-                )
+                {
+                    # Logic for routing
+                    # FIXME: This should be a separate function
+                    withProgress(message = "Getting directions...", {
+                        result <- getDirectionsBetweenPostalCodes(pickUp, dropOff)
+                        waypoints(result$waypoints)
+                    })
+                    # Actual text
+                    paste(
+                        "Searching for directions from",
+                        strong(getBuildingNameFromPostalCode(pickUp)),
+                        "to",
+                        strong(getBuildingNameFromPostalCode(dropOff))
+                    )
+                }
             )
         )
     })

@@ -13,3 +13,19 @@ setDefaultTab <- function(selector, tabId) {
         ))
     )
 }
+
+# Generates a GeoJSON LineString representation of a list of points
+points_to_lines <- function(points) {
+    list(
+        "type" = "FeatureCollection",
+        "features" = list(
+            list(
+                "type" = "Feature",
+                "geometry" = list(
+                    "type" = "LineString",
+                    "coordinates" = points
+                )
+            )
+        )
+    )
+}
