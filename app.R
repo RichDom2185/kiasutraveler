@@ -41,7 +41,8 @@ ui <- app(
                 )
             ),
             box(
-                style = "width: fit-content; position: absolute; bottom: 0; right: 0",
+                # TODO: Remove max-height and overflow-y hotfix
+                style = "width: fit-content; position: absolute; bottom: 0; right: 0; max-height: 30vh; overflow-y: auto",
                 homeTabContent,
                 rideHailingTabContent,
                 carSharingTabContent,
