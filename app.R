@@ -26,9 +26,11 @@ ui <- app(
                 tabs(
                     "transportModes",
                     # TODO: Fix IDs and add reactivity
-                    tab("grab", "Grab"),
+                    tab("rideHailing", "Ride Hailing"),
+                    tab("carSharing", "Car-Sharing"),
                     tab("taxi", "Taxi"),
-                    tab("pt", "Public Transport"),
+                    tab("publicTransport", "Public Transport"),
+                    tab("others", "Others")
                 )
             ),
             box(
@@ -89,6 +91,10 @@ server <- function(input, output) {
     })
 
     df <- reactive({
+        # FIXME: Beware of side effect due to
+        #        setting of global variable
+        setApiMode("auto")
+
         df <- data()$features$geometry$coordinates %>% data.frame()
 
         colnames(df) <- c("lng", "lat")
@@ -147,6 +153,7 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server, options = list(
-    port = 4000
+    port = 4000,
+    host = "0.0.0.0"
     # launch.browser = FALSE
 ))
