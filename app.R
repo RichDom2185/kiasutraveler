@@ -1,10 +1,11 @@
 library(shiny)
-library(shinyjs)
 library(shinyTime)
 library(mapboxer)
 
 source("api/functions.R")
 source("ui/components/bulma.R")
+
+source("logic/utils/functions.R")
 
 source("ui/pages/rideHailing.R")
 source("ui/pages/carSharing.R")
@@ -15,13 +16,7 @@ source("ui/pages/others.R")
 options(shiny.autoreload = TRUE)
 
 ui <- app(
-    useShinyjs(),
-    # TODO: Abstract this
-    HTML("<script defer>
-        $(document).on('shiny:connected', function() {
-            Shiny.setInputValue('activeTab', 'taxi');
-        });
-        </script>"),
+    setDefaultTab("activeTab", "taxi"),
     stackElements(
         mapboxerOutput("map", height = "100vh"),
         column(
