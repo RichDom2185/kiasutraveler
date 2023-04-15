@@ -24,6 +24,33 @@ trafficIncidentsTabContent <- conditionalPanel(
 )
 
 updateTrafficIncidentsTab <- function(input, output) {
+    # Base map
+    output$map <- renderMapboxer({
+        # Import API
+        api_key <- "REDACTED"
+
+        url_incidents <- "http://datamall2.mytransport.sg/ltaodataservice/TrafficIncidents"
+        response <- GET(url_incidents, add_headers(AccountKey = api_key))
+        data_incidents <- fromJSON(content(response, as = "text"))
+        data_incidents <- as.data.frame(data_incidents)
+        df_incidents <- data.frame(lat = data_incidents$value.Latitude, long = data_incidents$value.Longitude)
+
+        # Convert data to an sf object
+        df_incident_sf <- st_as_sf(df_incidents, coords = c("long", "lat"), crs = 4326)
+        df_incident_sf$message <- data_incidents$value.Message
+
+        # Add a heatmap layer to the Mapbox map
+        traffic_map <- as_mapbox_source(df_incident_sf) %>%
+            mapboxer(style = getBasemap("voyager"), center = COORDINATES_SINGAPORE, zoom = 10) %>%
+            add_navigation_control() %>%
+            add_circle_layer(
+                id = "Incidents",
+                circle_color = "#0171bb",
+                popup = "<p>{{message}}</p>"
+            )
+    })
+
+
     incidentsDescription <- reactiveVal()
 
     observeEvent(input$incidentPlotType, {
@@ -123,7 +150,6 @@ updateTrafficIncidentsTab <- function(input, output) {
                     "Using PMD to Travel on Road" = "PMD",
                     "Other Causes" = "Misc"
                 ))
-
 
                 traffic_wordcloud <- traffic_data %>%
                     group_by(causes_of_accident) %>%
