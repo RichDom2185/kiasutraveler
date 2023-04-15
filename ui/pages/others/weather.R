@@ -1,13 +1,87 @@
 library(dplyr)
 library(ggplot2)
+library(jsonlite)
+library(leaflet)
 library(shiny)
 
 weatherTabContent <- conditionalPanel(
     condition = "input.othersTab === 'weather'",
+    leafletOutput("weatherMap"),
     plotOutput("weatherPlot")
 )
 
 updateWeatherTab <- function(input, output) {
+    output$weatherMap <- renderLeaflet({
+        ### data source ###
+        url_forecast <- "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast"
+        data_rainfallForecast <- fromJSON(url_forecast)
+        coordinates <- as.data.frame(data_rainfallForecast$area_metadata$label_location)
+        location <- as.data.frame(data_rainfallForecast$items$forecasts)
+        data_twohour <- cbind(location, coordinates)
+
+        data_twohour
+
+        #### visualisation ###
+        data_twohour$forecast <- as.factor(data_twohour$forecast)
+        data_twohour$forecast <- gsub("\\s*\\(.+", "", data_twohour$forecast)
+
+
+        # Define icon URLs using a list
+        icon_urls <- list(
+            "Sunny" = "https://cdn-icons-png.flaticon.com/128/4150/4150875.png",
+            "Cloudy" = "https://cdn-icons-png.flaticon.com/128/4150/4150884.png",
+            "Partly Cloudy" = "https://cdn-icons-png.flaticon.com/128/4150/4150891.png",
+            "Light Showers" = "https://cdn-icons-png.flaticon.com/128/4150/4150904.png",
+            "Light Rain" = "https://cdn-icons-png.flaticon.com/128/4150/4150904.png",
+            "Showers" = "https://cdn-icons-png.flaticon.com/128/4150/4150897.png",
+            "Moderate Rain" = "https://cdn-icons-png.flaticon.com/128/4150/4150897.png",
+            "Thundery Showers" = "https://cdn-icons-png.flaticon.com/128/4150/4150944.png"
+        )
+
+
+        icons <- icons(
+            iconUrl = ifelse(
+                grepl("Sunny", data_twohour$forecast),
+                icon_urls[["Sunny"]],
+                ifelse(
+                    grepl("Cloudy", data_twohour$forecast),
+                    icon_urls[["Cloudy"]],
+                    ifelse(
+                        grepl("Partly Cloudy", data_twohour$forecast),
+                        icon_urls[["Partly Cloudy"]],
+                        ifelse(
+                            grepl("Light Showers", data_twohour$forecast),
+                            icon_urls[["Light Showers"]],
+                            ifelse(
+                                grepl("Light Rain", data_twohour$forecast),
+                                icon_urls[["Light Rain"]],
+                                ifelse(
+                                    grepl("Showers", data_twohour$forecast),
+                                    icon_urls[["Showers"]],
+                                    ifelse(
+                                        grepl("Moderate Rain", data_twohour$forecast),
+                                        icon_urls[["Moderate Rain"]],
+                                        icon_urls[["Thundery Showers"]] # Default icon URL
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            iconWidth = 38,
+            iconHeight = 38
+        )
+
+
+        twohours <- leaflet(data_twohour) %>%
+            setView(lng = 103.8198, lat = 1.3521, zoom = 12) %>%
+            addTiles() %>%
+            addMarkers(lng = ~longitude, lat = ~latitude, popup = ~ paste(area, forecast, sep = ": "), icon = icons)
+
+        twohours
+    })
+
     output$weatherPlot <- renderPlot({
         rainfall_data <- read.csv("data/MonthlyRainfall.csv")
         monthly_avg <- rainfall_data %>%
