@@ -6,7 +6,7 @@ library(shiny)
 source("logic/maps/maps.R")
 
 taxiTabContent <- conditionalPanel(
-    condition = "input.activeTab == 'taxi'",
+    condition = "input.activeTab === 'taxi'",
     columns(
         column(
             dateInput(

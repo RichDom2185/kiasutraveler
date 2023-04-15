@@ -6,7 +6,11 @@ library(mapboxer)
 source("api/functions.R")
 source("ui/components/bulma.R")
 
+source("ui/pages/rideHailing.R")
+source("ui/pages/carSharing.R")
 source("ui/pages/taxi.R")
+source("ui/pages/publicTransport.R")
+source("ui/pages/others.R")
 
 options(shiny.autoreload = TRUE)
 
@@ -34,11 +38,11 @@ ui <- app(
             ),
             box(
                 style = "width: fit-content; position: absolute; bottom: 0; right: 0",
+                rideHailingTabContent,
+                carSharingTabContent,
                 taxiTabContent,
-                conditionalPanel(
-                    condition = "input.activeTab !== 'taxi'",
-                    p("Coming soon!")
-                )
+                publicTransportTabContent,
+                othersTabContent
             )
         )
     )
