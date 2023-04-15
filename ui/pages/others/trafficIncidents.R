@@ -1,5 +1,6 @@
 library(dplyr)
 library(ggplot2)
+library(mapboxer)
 library(shiny)
 library(stringr)
 library(wordcloud)
@@ -20,36 +21,33 @@ trafficIncidentsTabContent <- conditionalPanel(
     ),
     htmlOutput("incidentsDescription"),
     plotOutput("incidentsPlot")
-    # TODO: Live Traffic Incidents
 )
 
 updateTrafficIncidentsTab <- function(input, output) {
     # Base map
     output$map <- renderMapboxer({
-        # Import API
-        api_key <- "REDACTED"
+        data_incidents <- do.call(rbind, getTrafficIncidents()$incidents) %>%
+            # Columns are lists
+            data.frame() %>%
+            lapply(unlist) %>%
+            # Columns are vectors
+            data.frame()
 
-        url_incidents <- "http://datamall2.mytransport.sg/ltaodataservice/TrafficIncidents"
-        response <- GET(url_incidents, add_headers(AccountKey = api_key))
-        data_incidents <- fromJSON(content(response, as = "text"))
-        data_incidents <- as.data.frame(data_incidents)
-        df_incidents <- data.frame(lat = data_incidents$value.Latitude, long = data_incidents$value.Longitude)
-
-        # Convert data to an sf object
-        df_incident_sf <- st_as_sf(df_incidents, coords = c("long", "lat"), crs = 4326)
-        df_incident_sf$message <- data_incidents$value.Message
-
-        # Add a heatmap layer to the Mapbox map
-        traffic_map <- as_mapbox_source(df_incident_sf) %>%
-            mapboxer(style = getBasemap("voyager"), center = COORDINATES_SINGAPORE, zoom = 10) %>%
-            add_navigation_control() %>%
+        mapboxer(
+            # TODO: Remove hardcoding
+            style = getBasemap("voyager"),
+            center = COORDINATES_SINGAPORE,
+            zoom = 10,
+            pitch = 15,
+            minZoom = 7
+        ) %>%
+            add_navigation_control(pos = "bottom-left") %>%
             add_circle_layer(
-                id = "Incidents",
+                source = as_mapbox_source(data_incidents),
                 circle_color = "#0171bb",
-                popup = "<p>{{message}}</p>"
+                popup = "<p>{{details}}</p>"
             )
     })
-
 
     incidentsDescription <- reactiveVal()
 
