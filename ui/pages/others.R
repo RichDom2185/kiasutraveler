@@ -6,7 +6,7 @@ source("ui/pages/others/crowding.R")
 source("ui/pages/others/trafficIncidents.R")
 
 othersTabContent <- list(
-    setDefaultTab("othersTab", "trafficIncidents"),
+    setDefaultTab("othersTab", "weather"),
     conditionalPanel(
         condition = "input.activeTab === 'others'",
         tabs(
