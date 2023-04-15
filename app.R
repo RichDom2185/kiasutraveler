@@ -16,6 +16,7 @@ options(shiny.autoreload = TRUE)
 
 ui <- app(
     useShinyjs(),
+    # TODO: Abstract this
     HTML("<script defer>
         $(document).on('shiny:connected', function() {
             Shiny.setInputValue('activeTab', 'taxi');
@@ -32,8 +33,7 @@ ui <- app(
                 style = "width: fit-content; position: absolute; right: 0; top: 0",
                 class = "py-3 px-3",
                 tabs(
-                    "transportModes",
-                    # TODO: Fix IDs and add reactivity
+                    "activeTab",
                     tab("rideHailing", "Ride Hailing"),
                     tab("carSharing", "Car-Sharing"),
                     tab("taxi", "Taxi"),

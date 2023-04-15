@@ -27,13 +27,22 @@ column <- function(..., class = "") {
 }
 
 
-tabs <- function(id, ..., class = "") {
-    div(class = paste("tabs is-toggle is-centered", class), tags$ul(id = id, ...))
+tabs <- function(selector, ..., class = "") {
+    # Internal function in order to access parent environment
+    tab <- function(id, title, class = "", ...) {
+        tags$li(id = id, class = class, a(
+            onClick = paste0("Shiny.setInputValue('", selector, "', '", id, "')"), title, ...
+        ))
+    }
+
+    div(
+        class = paste("tabs is-toggle is-centered", class),
+        tags$ul(id = selector, lapply(list(...), function(args) do.call(tab, args)))
+    )
 }
+
 tab <- function(id, title, class = "", ...) {
-    tags$li(id = id, class = class, a(
-        onClick = paste0("Shiny.setInputValue('activeTab', '", id, "')"), title, ...
-    ))
+    list(id, title, class, ...)
 }
 
 appTabs <- function(id, ..., selected = 1) {
