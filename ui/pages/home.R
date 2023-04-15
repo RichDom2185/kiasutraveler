@@ -64,14 +64,25 @@ updateHomeTab <- function(input, output) {
         ) %>% add_navigation_control(pos = "bottom-left")
 
         if (nrow(waypoints()) > 0) {
-            map <- map %>% add_line_layer(
-                source = waypoints() %>%
-                    points_to_lines() %>%
-                    toJSON(auto_unbox = TRUE) %>%
-                    as_mapbox_source(),
-                line_color = "red",
-                line_width = 5
-            )
+            map <- map %>%
+                add_line_layer(
+                    source = waypoints() %>%
+                        points_to_lines() %>%
+                        toJSON(auto_unbox = TRUE) %>%
+                        as_mapbox_source(),
+                    line_color = "red",
+                    line_width = 5
+                ) %>%
+                add_marker(
+                    head(waypoints(), 1L)[1],
+                    head(waypoints(), 1L)[2],
+                    popup = paste("Pick-up:", getCoordinatesFromAddress(input$pickUp)[[1]]$name)
+                ) %>%
+                add_marker(
+                    tail(waypoints(), 1L)[1],
+                    tail(waypoints(), 1L)[2],
+                    popup = paste("Destination:", getCoordinatesFromAddress(input$dropOff)[[1]]$name)
+                )
         } else {
             map
         }
