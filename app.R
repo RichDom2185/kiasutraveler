@@ -8,6 +8,7 @@ source("ui/components/bulma.R")
 
 source("logic/utils/functions.R")
 
+source("ui/pages/home.R")
 source("ui/pages/rideHailing.R")
 source("ui/pages/carSharing.R")
 source("ui/pages/taxi.R")
@@ -18,7 +19,7 @@ options(shiny.autoreload = TRUE)
 
 ui <- app(
     useShinyjs(),
-    setDefaultTab("activeTab", "taxi"),
+    setDefaultTab("activeTab", "home"),
     stackElements(
         mapboxerOutput("map", height = "100vh"),
         column(
@@ -31,6 +32,7 @@ ui <- app(
                 class = "py-3 px-3",
                 tabs(
                     "activeTab",
+                    tab("home", "Home"),
                     tab("rideHailing", "Ride Hailing"),
                     tab("carSharing", "Car-Sharing"),
                     tab("taxi", "Taxi"),
@@ -40,6 +42,7 @@ ui <- app(
             ),
             box(
                 style = "width: fit-content; position: absolute; bottom: 0; right: 0",
+                homeTabContent,
                 rideHailingTabContent,
                 carSharingTabContent,
                 taxiTabContent,
@@ -59,6 +62,7 @@ server <- function(input, output) {
         addCssClass(id = currentActiveTab(), class = "is-active")
 
         switch(input$activeTab,
+            "home" = updateHomeTab(input, output),
             "rideHailing" = updateRideHailingTab(input, output),
             "carSharing" = updateCarSharingTab(input, output),
             "taxi" = updateTaxiTab(input, output),
