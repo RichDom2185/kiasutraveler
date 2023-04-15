@@ -4,6 +4,13 @@ library(shiny)
 library(stringr)
 library(wordcloud)
 
+TRAFFIC_INCIDENT_TYPES <- c(
+    "Accident", "Roadwork", "Vehicle breakdown",
+    "Weather", "Obstacle", "Road Block",
+    "Heavy Traffic", "Misc", "Diversion",
+    "Unattended Vehicle"
+)
+
 trafficIncidentsTabContent <- conditionalPanel(
     condition = "input.othersTab === 'trafficIncidents'",
     radioButtons(
@@ -133,31 +140,24 @@ updateTrafficIncidentsTab <- function(input, output) {
                 )
             },
             "Bar Chart" = {
-                # Import API
-                api_key <- "REDACTED"
+                data_incidents <- do.call(rbind, getTrafficIncidents()$incidents) %>%
+                    # Columns are lists
+                    data.frame() %>%
+                    lapply(unlist) %>%
+                    # Columns are vectors
+                    data.frame() %>%
+                    group_by(type) %>%
+                    summarise(count = n())
 
-                url_incidents <- "http://datamall2.mytransport.sg/ltaodataservice/TrafficIncidents"
-                response <- GET(url_incidents, add_headers(AccountKey = api_key))
-                data_incidents <- fromJSON(content(response, as = "text"))
-                data_incidents <- as.data.frame(data_incidents)
-                # Extract location
-                df_incidents <- data.frame(lat = data_incidents$value.Latitude, long = data_incidents$value.Longitude)
-                traffic_counted2 <- data_incidents %>%
-                    group_by(value.Type) %>%
-                    summarise(Count = n())
+                total_counts <- data.frame(type = TRAFFIC_INCIDENT_TYPES) %>%
+                    full_join(data_incidents) %>%
+                    mutate(count = coalesce(count, 0))
 
-                # Account for Incident Types not occured on the day
-                all_incidents <- c("Accident", "Roadwork", "Vehicle Breakdown", "Weather", "Obstacle", "Road Block", "Heavy Traffic", "Misc", "Diversion", "Unattended Vehicle")
-                not_today <- gsub(paste(traffic_counted2$value.Type, collapse = "|"), "", all_incidents)
-                not_today <- not_today[nzchar(not_today)]
-                not_today <- data.frame(value.Type = not_today, Count = 0)
-                traffic_counted2 <- rbind(traffic_counted2, not_today)
-
-                traffic_count_live <- ggplot(traffic_counted2) +
-                    geom_bar(aes(x = value.Type, y = Count), stat = "identity", fill = "#0171bb") +
-                    geom_text(aes(label = Count, x = value.Type, y = Count), vjust = -0.2, colour = "black")
-
-                traffic_count_live + theme_classic() + labs(title = "Live Traffic Incidents", x = "Type of Incident", y = "Number of Accidents") + theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 20, face = "bold"))
+                ggplot(total_counts, aes(x = type, y = count)) +
+                    geom_bar(stat = "identity", fill = "#0171bb") +
+                    geom_text(aes(label = count), vjust = -0.2, color = "black") +
+                    labs(x = "Type of Incident", y = "Number of Accidents") +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 1), )
             },
             # default
             ""
