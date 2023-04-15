@@ -1,4 +1,7 @@
+library(mapboxer)
 library(shiny)
+
+source("logic/maps/maps.R")
 
 ## FUNCTIONS
 
@@ -27,6 +30,18 @@ homeTabContent <- conditionalPanel(
 )
 
 updateHomeTab <- function(input, output) {
+    # TODO: Refactor
+    output$map <- renderMapboxer({
+        mapboxer(
+            # TODO: Remove hardcoding
+            style = getBasemap("voyager"),
+            center = COORDINATES_SINGAPORE,
+            zoom = 10,
+            pitch = 15,
+            minZoom = 7
+        ) %>% add_navigation_control(pos = "bottom-left")
+    })
+
     output$homeDescription <- renderText({
         pickUp <- isolate(input$pickUp)
         dropOff <- isolate(input$dropOff)
