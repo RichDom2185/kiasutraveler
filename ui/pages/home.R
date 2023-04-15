@@ -39,13 +39,13 @@ getDirectionsBetweenPostalCodes <- function(fromPostalCode, toPostalCode) {
 homeTabContent <- conditionalPanel(
     condition = "input.activeTab === 'home'",
     p("Welcome to kiasutraveler! Where would you like to go today?"),
-    HTML("<br>"),
+    br(),
     columns(
         column(input.text("pickUp", "Enter postal code...", label = "Pick-up from:")),
         column(input.text("dropOff", "Enter postal code...", label = "Destination to:"))
     ),
     actionButton("runButton", "Take me there!", class = "button is-light is-fullwidth"),
-    HTML("<br>"),
+    br(),
     htmlOutput("homeDescription")
 )
 
