@@ -50,6 +50,8 @@ updatePublicTransportTab <- function(input, output) {
         pickUp <- isolate(input$pickUp)
         dropOff <- isolate(input$dropOff)
         data <- getPublicTransportDirectionsBetweenPostalCodes(pickUp, dropOff)
+        # Create n discrete colors
+        data$colors <- rainbow(nrow(data))
 
         for (i in seq_len(nrow(data))) {
             layer_id <- paste0("itinerary-", i)
@@ -57,7 +59,9 @@ updatePublicTransportTab <- function(input, output) {
                 add_line_layer(
                     id = layer_id,
                     source = data$legs[[i]] %>% as_mapbox_source(),
-                    line_color = "red", # TODO: Randomize
+                    line_color = data$colors[[i]],
+                    line_opacity = 0.4,
+                    line_dasharray = c(3, i * 0.5),
                     line_width = 5
                 ) %>%
                 add_tooltips(layer_id, paste0(
