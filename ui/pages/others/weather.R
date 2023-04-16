@@ -43,7 +43,22 @@ weatherTabContent <- conditionalPanel(
         )
     ),
     ##### FIXME: End of hacky section #########
-    plotOutput("weatherPlot")
+    p("Select visualization above for Live weather map"),
+    br(),
+    strong("Historical Rainfall Bar Plot"),
+    p(
+        "The following bar graph shows historical rainfall data within Singapore from
+        2013 to 2022. The Y-axis shows the number of rainy days per month. As you can
+        observe, November and December has the most number of rainy days per month. Do
+        remember to bring an umbrella with you during this rainy season"
+    ),
+    br(),
+    plotOutput("weatherPlot"),
+    p(
+        "On the other hand, February and March tend to have the least number of rainy
+        days. Feel free to use public transport as minimal road congestions will be
+        caused by heavy showers."
+    )
 )
 
 updateWeatherTab <- function(input, output) {
