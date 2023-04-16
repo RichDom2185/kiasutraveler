@@ -19,6 +19,10 @@ getServicesBetweenPostalCodes <- function(fromPostalCode, toPostalCode) {
 
 rideHailingTabContent <- conditionalPanel(
     condition = "input.activeTab === 'rideHailing'",
+    p(
+        "The following ride-hailing services from Grab are available
+        between your selected start and end locations:"
+    ),
     htmlOutput("rideHailingDescription"),
     tableOutput("rideHailingTable")
 )

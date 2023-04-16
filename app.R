@@ -1,6 +1,7 @@
 library(shiny)
 library(shinyjs)
 library(shinyTime)
+library(leaflet)
 library(mapboxer)
 library(bslib)
 library(dplyr)
@@ -29,7 +30,18 @@ ui <- app(
     useShinyjs(),
     setDefaultTab("activeTab", "home"),
     stackElements(
-        mapboxerOutput("map", height = "100vh"),
+        ##### FIXME: Start of hacky section #########
+        # TODO: Combine to mapbox
+        setDefaultTab("mapProvider", "mapbox"),
+        conditionalPanel(
+            condition = "input.mapProvider === 'mapbox'",
+            mapboxerOutput("map", height = "100vh")
+        ),
+        conditionalPanel(
+            condition = "input.mapProvider === 'leaflet'",
+            leafletOutput("leafletMap", height = "100vh")
+        ),
+        ##### FIXME: End of hacky section #########
         column(
             box(
                 style = "width: fit-content; position: absolute; top: 0; left: 0;",
@@ -58,6 +70,23 @@ ui <- app(
                 publicTransportTabContent,
                 othersTabContent
             )
+        ),
+        ##### FIXME: Start of hacky section #########
+        # TODO: Refactor
+        tags$div(
+            id = "modalOverlay",
+            # FIXME: For some reason removing is-active prevents the modal from updating
+            class = "modal is-active",
+            tags$div(class = "modal-background"),
+            tags$div(
+                class = "modal-content pt-3 px-4",
+                tableOutput("modalContentBody")
+            ),
+            tags$button(
+                class = "modal-close is-large",
+                onclick = "$('#modalOverlay').removeClass('is-active');"
+            )
+            ##### FIXME: End of hacky section #########
         )
     )
 )
