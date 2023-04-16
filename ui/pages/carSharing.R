@@ -26,9 +26,10 @@ updateCarSharingTab <- function(input, output) {
             ) %>%
             add_tooltips("getgo-layer", paste0(
                 strong("{{vehicleName}}"),
-                "<br>",
+                br(),
                 tags$em("GetGo ({{vehicleNo}})"),
-                "<br>Capacity: {{capacity}}"
+                br(),
+                "Capacity: {{capacity}}"
             )) %>%
             add_circle_layer(
                 id = "bluesg-layer",
@@ -42,7 +43,7 @@ updateCarSharingTab <- function(input, output) {
             ) %>%
             add_tooltips("bluesg-layer", paste0(
                 tags$em("BlueSG Station"),
-                "<br>",
+                br(),
                 strong("{{numCars}} available")
             ))
     })
