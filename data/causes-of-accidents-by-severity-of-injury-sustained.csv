@@ -1,0 +1,329 @@
+year,accident_classification,road_user_group,causes_of_accident,number_of_accidents
+2012,FATAL,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,59
+2012,FATAL,"Drivers, Riders or Cyclists",Failing to Have Proper Control,50
+2012,FATAL,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,9
+2012,FATAL,"Drivers, Riders or Cyclists",Changing Lane without Due Care,6
+2012,FATAL,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,9
+2012,FATAL,"Drivers, Riders or Cyclists",Turning Without Due Care,2
+2012,FATAL,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,3
+2012,FATAL,"Drivers, Riders or Cyclists",Overtaking without Due Care,1
+2012,FATAL,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,1
+2012,FATAL,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,4
+2012,FATAL,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",31
+2012,INJURY,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,2710
+2012,INJURY,"Drivers, Riders or Cyclists",Failing to Have Proper Control,1237
+2012,INJURY,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,862
+2012,INJURY,"Drivers, Riders or Cyclists",Changing Lane without Due Care,498
+2012,INJURY,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,237
+2012,INJURY,"Drivers, Riders or Cyclists",Turning Without Due Care,185
+2012,INJURY,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,115
+2012,INJURY,"Drivers, Riders or Cyclists",Overtaking without Due Care,79
+2012,INJURY,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,49
+2012,INJURY,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,36
+2012,INJURY,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",808
+2012,FATAL,Pedestrians,Crossing Heedless of Traffic,10
+2012,FATAL,Pedestrians,Failing to Use Available Pedestrian Crossing,2
+2012,FATAL,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,6
+2012,FATAL,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,2
+2012,FATAL,Pedestrians,Playing on The Road or Carpark,2
+2012,FATAL,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2012,FATAL,Pedestrians,Under the Influence of Alcohol,1
+2012,FATAL,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2012,FATAL,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,3
+2012,INJURY,Pedestrians,Crossing Heedless of Traffic,162
+2012,INJURY,Pedestrians,Failing to Use Available Pedestrian Crossing,42
+2012,INJURY,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,63
+2012,INJURY,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,36
+2012,INJURY,Pedestrians,Playing on The Road or Carpark,4
+2012,INJURY,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,2
+2012,INJURY,Pedestrians,Under the Influence of Alcohol,2
+2012,INJURY,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2012,INJURY,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,128
+2012,FATAL,NA,Causes Attributed to Vehicles,3
+2012,INJURY,NA,Causes Attributed to Vehicles,17
+2012,FATAL,NA,Causes Attributed to Road Conditions,4
+2012,INJURY,NA,Causes Attributed to Road Conditions,11
+2012,FATAL,NA,Other Causes,23
+2012,INJURY,NA,Other Causes,52
+2013,FATAL,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,53
+2013,FATAL,"Drivers, Riders or Cyclists",Failing to Have Proper Control,38
+2013,FATAL,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,15
+2013,FATAL,"Drivers, Riders or Cyclists",Changing Lane without Due Care,7
+2013,FATAL,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,5
+2013,FATAL,"Drivers, Riders or Cyclists",Turning Without Due Care,8
+2013,FATAL,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,6
+2013,FATAL,"Drivers, Riders or Cyclists",Overtaking without Due Care,1
+2013,FATAL,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,3
+2013,FATAL,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,2
+2013,FATAL,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",23
+2013,INJURY,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,2398
+2013,INJURY,"Drivers, Riders or Cyclists",Failing to Have Proper Control,1180
+2013,INJURY,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,827
+2013,INJURY,"Drivers, Riders or Cyclists",Changing Lane without Due Care,465
+2013,INJURY,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,208
+2013,INJURY,"Drivers, Riders or Cyclists",Turning Without Due Care,201
+2013,INJURY,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,119
+2013,INJURY,"Drivers, Riders or Cyclists",Overtaking without Due Care,93
+2013,INJURY,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,56
+2013,INJURY,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,39
+2013,INJURY,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",688
+2013,FATAL,Pedestrians,Crossing Heedless of Traffic,10
+2013,FATAL,Pedestrians,Failing to Use Available Pedestrian Crossing,3
+2013,FATAL,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,2
+2013,FATAL,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,1
+2013,FATAL,Pedestrians,Playing on The Road or Carpark,0
+2013,FATAL,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2013,FATAL,Pedestrians,Under the Influence of Alcohol,3
+2013,FATAL,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2013,FATAL,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,6
+2013,INJURY,Pedestrians,Crossing Heedless of Traffic,176
+2013,INJURY,Pedestrians,Failing to Use Available Pedestrian Crossing,38
+2013,INJURY,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,46
+2013,INJURY,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,32
+2013,INJURY,Pedestrians,Playing on The Road or Carpark,2
+2013,INJURY,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2013,INJURY,Pedestrians,Under the Influence of Alcohol,3
+2013,INJURY,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2013,INJURY,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,122
+2013,FATAL,NA,Causes Attributed to Vehicles,3
+2013,INJURY,NA,Causes Attributed to Vehicles,34
+2013,FATAL,NA,Causes Attributed to Road Conditions,3
+2013,INJURY,NA,Causes Attributed to Road Conditions,13
+2013,FATAL,NA,Other Causes,15
+2013,INJURY,NA,Other Causes,53
+2014,FATAL,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,55
+2014,FATAL,"Drivers, Riders or Cyclists",Failing to Have Proper Control,40
+2014,FATAL,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,14
+2014,FATAL,"Drivers, Riders or Cyclists",Changing Lane without Due Care,4
+2014,FATAL,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,4
+2014,FATAL,"Drivers, Riders or Cyclists",Turning Without Due Care,4
+2014,FATAL,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,1
+2014,FATAL,"Drivers, Riders or Cyclists",Overtaking without Due Care,1
+2014,FATAL,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,1
+2014,FATAL,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,2
+2014,FATAL,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",13
+2014,INJURY,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,2459
+2014,INJURY,"Drivers, Riders or Cyclists",Failing to Have Proper Control,1336
+2014,INJURY,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,1040
+2014,INJURY,"Drivers, Riders or Cyclists",Changing Lane without Due Care,569
+2014,INJURY,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,227
+2014,INJURY,"Drivers, Riders or Cyclists",Turning Without Due Care,187
+2014,INJURY,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,98
+2014,INJURY,"Drivers, Riders or Cyclists",Overtaking without Due Care,100
+2014,INJURY,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,59
+2014,INJURY,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,46
+2014,INJURY,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",544
+2014,FATAL,Pedestrians,Crossing Heedless of Traffic,6
+2014,FATAL,Pedestrians,Failing to Use Available Pedestrian Crossing,0
+2014,FATAL,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,2
+2014,FATAL,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,3
+2014,FATAL,Pedestrians,Playing on The Road or Carpark,0
+2014,FATAL,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2014,FATAL,Pedestrians,Under the Influence of Alcohol,1
+2014,FATAL,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,1
+2014,FATAL,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,5
+2014,INJURY,Pedestrians,Crossing Heedless of Traffic,173
+2014,INJURY,Pedestrians,Failing to Use Available Pedestrian Crossing,39
+2014,INJURY,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,51
+2014,INJURY,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,25
+2014,INJURY,Pedestrians,Playing on The Road or Carpark,2
+2014,INJURY,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2014,INJURY,Pedestrians,Under the Influence of Alcohol,1
+2014,INJURY,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,1
+2014,INJURY,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,133
+2014,FATAL,NA,Causes Attributed to Vehicles,0
+2014,INJURY,NA,Causes Attributed to Vehicles,18
+2014,FATAL,NA,Causes Attributed to Road Conditions,1
+2014,INJURY,NA,Causes Attributed to Road Conditions,8
+2014,FATAL,NA,Other Causes,12
+2014,INJURY,NA,Other Causes,41
+2015,FATAL,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,58
+2015,FATAL,"Drivers, Riders or Cyclists",Failing to Have Proper Control,48
+2015,FATAL,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,6
+2015,FATAL,"Drivers, Riders or Cyclists",Changing Lane without Due Care,6
+2015,FATAL,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,2
+2015,FATAL,"Drivers, Riders or Cyclists",Turning Without Due Care,1
+2015,FATAL,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,1
+2015,FATAL,"Drivers, Riders or Cyclists",Overtaking without Due Care,2
+2015,FATAL,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,1
+2015,FATAL,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,1
+2015,FATAL,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",14
+2015,INJURY,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,2592
+2015,INJURY,"Drivers, Riders or Cyclists",Failing to Have Proper Control,1165
+2015,INJURY,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,1043
+2015,INJURY,"Drivers, Riders or Cyclists",Changing Lane without Due Care,619
+2015,INJURY,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,162
+2015,INJURY,"Drivers, Riders or Cyclists",Turning Without Due Care,145
+2015,INJURY,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,56
+2015,INJURY,"Drivers, Riders or Cyclists",Overtaking without Due Care,104
+2015,INJURY,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,13
+2015,INJURY,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,71
+2015,INJURY,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",598
+2015,FATAL,Pedestrians,Crossing Heedless of Traffic,4
+2015,FATAL,Pedestrians,Failing to Use Available Pedestrian Crossing,6
+2015,FATAL,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,4
+2015,FATAL,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,3
+2015,FATAL,Pedestrians,Playing on The Road or Carpark,0
+2015,FATAL,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2015,FATAL,Pedestrians,Under the Influence of Alcohol,1
+2015,FATAL,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2015,FATAL,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,2
+2015,INJURY,Pedestrians,Crossing Heedless of Traffic,139
+2015,INJURY,Pedestrians,Failing to Use Available Pedestrian Crossing,39
+2015,INJURY,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,43
+2015,INJURY,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,25
+2015,INJURY,Pedestrians,Playing on The Road or Carpark,2
+2015,INJURY,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,6
+2015,INJURY,Pedestrians,Under the Influence of Alcohol,3
+2015,INJURY,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2015,INJURY,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,121
+2015,FATAL,NA,Causes Attributed to Vehicles,1
+2015,INJURY,NA,Causes Attributed to Vehicles,23
+2015,FATAL,NA,Causes Attributed to Road Conditions,0
+2015,INJURY,NA,Causes Attributed to Road Conditions,8
+2015,FATAL,NA,Other Causes,1
+2015,INJURY,NA,Other Causes,42
+2016,FATAL,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,42
+2016,FATAL,"Drivers, Riders or Cyclists",Failing to Have Proper Control,36
+2016,FATAL,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,8
+2016,FATAL,"Drivers, Riders or Cyclists",Changing Lane without Due Care,5
+2016,FATAL,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,3
+2016,FATAL,"Drivers, Riders or Cyclists",Turning Without Due Care,4
+2016,FATAL,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,2
+2016,FATAL,"Drivers, Riders or Cyclists",Overtaking without Due Care,2
+2016,FATAL,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,1
+2016,FATAL,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,6
+2016,FATAL,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",10
+2016,INJURY,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,2742
+2016,INJURY,"Drivers, Riders or Cyclists",Failing to Have Proper Control,1059
+2016,INJURY,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,887
+2016,INJURY,"Drivers, Riders or Cyclists",Changing Lane without Due Care,499
+2016,INJURY,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,112
+2016,INJURY,"Drivers, Riders or Cyclists",Turning Without Due Care,180
+2016,INJURY,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,30
+2016,INJURY,"Drivers, Riders or Cyclists",Overtaking without Due Care,77
+2016,INJURY,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,10
+2016,INJURY,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,78
+2016,INJURY,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",436
+2016,FATAL,Pedestrians,Crossing Heedless of Traffic,3
+2016,FATAL,Pedestrians,Failing to Use Available Pedestrian Crossing,5
+2016,FATAL,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,6
+2016,FATAL,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,1
+2016,FATAL,Pedestrians,Playing on The Road or Carpark,0
+2016,FATAL,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2016,FATAL,Pedestrians,Under the Influence of Alcohol,0
+2016,FATAL,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2016,FATAL,Pedestrians,Using PMD to Travel on Road,0
+2016,FATAL,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,2
+2016,INJURY,Pedestrians,Crossing Heedless of Traffic,110
+2016,INJURY,Pedestrians,Failing to Use Available Pedestrian Crossing,39
+2016,INJURY,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,41
+2016,INJURY,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,44
+2016,INJURY,Pedestrians,Playing on The Road or Carpark,0
+2016,INJURY,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2016,INJURY,Pedestrians,Under the Influence of Alcohol,3
+2016,INJURY,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2016,INJURY,Pedestrians,Using PMD to Travel on Road,2
+2016,INJURY,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,107
+2016,FATAL,NA,Causes Attributed to Vehicles,0
+2016,INJURY,NA,Causes Attributed to Vehicles,6
+2016,FATAL,NA,Causes Attributed to Road Conditions,1
+2016,INJURY,NA,Causes Attributed to Road Conditions,0
+2016,FATAL,NA,Other Causes,3
+2016,INJURY,NA,Other Causes,18
+2017,FATAL,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,32
+2017,FATAL,"Drivers, Riders or Cyclists",Failing to Have Proper Control,18
+2017,FATAL,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,1
+2017,FATAL,"Drivers, Riders or Cyclists",Changing Lane without Due Care,3
+2017,FATAL,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,1
+2017,FATAL,"Drivers, Riders or Cyclists",Turning Without Due Care,1
+2017,FATAL,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,10
+2017,FATAL,"Drivers, Riders or Cyclists",Overtaking without Due Care,1
+2017,FATAL,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,2
+2017,FATAL,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,6
+2017,FATAL,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",19
+2017,INJURY,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,2076
+2017,INJURY,"Drivers, Riders or Cyclists",Failing to Have Proper Control,745
+2017,INJURY,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,623
+2017,INJURY,"Drivers, Riders or Cyclists",Changing Lane without Due Care,411
+2017,INJURY,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,111
+2017,INJURY,"Drivers, Riders or Cyclists",Turning Without Due Care,216
+2017,INJURY,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,9
+2017,INJURY,"Drivers, Riders or Cyclists",Overtaking without Due Care,72
+2017,INJURY,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,27
+2017,INJURY,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,70
+2017,INJURY,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",365
+2017,FATAL,Pedestrians,Crossing Heedless of Traffic,6
+2017,FATAL,Pedestrians,Failing to Use Available Pedestrian Crossing,2
+2017,FATAL,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,5
+2017,FATAL,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,0
+2017,FATAL,Pedestrians,Playing on The Road or Carpark,0
+2017,FATAL,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2017,FATAL,Pedestrians,Under the Influence of Alcohol,0
+2017,FATAL,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2017,FATAL,Pedestrians,Using PMD to Travel on Road,0
+2017,FATAL,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,2
+2017,INJURY,Pedestrians,Crossing Heedless of Traffic,80
+2017,INJURY,Pedestrians,Failing to Use Available Pedestrian Crossing,46
+2017,INJURY,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,52
+2017,INJURY,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,52
+2017,INJURY,Pedestrians,Playing on The Road or Carpark,1
+2017,INJURY,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2017,INJURY,Pedestrians,Under the Influence of Alcohol,2
+2017,INJURY,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2017,INJURY,Pedestrians,Using PMD to Travel on Road,19
+2017,INJURY,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,86
+2017,FATAL,NA,Causes Attributed to Vehicles,0
+2017,INJURY,NA,Causes Attributed to Vehicles,9
+2017,FATAL,NA,Causes Attributed to Road Conditions,0
+2017,INJURY,NA,Causes Attributed to Road Conditions,5
+2017,FATAL,NA,Other Causes,0
+2017,INJURY,NA,Other Causes,24
+2018,FATAL,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,38
+2018,FATAL,"Drivers, Riders or Cyclists",Failing to Have Proper Control,23
+2018,FATAL,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,4
+2018,FATAL,"Drivers, Riders or Cyclists",Changing Lane without Due Care,2
+2018,FATAL,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,3
+2018,FATAL,"Drivers, Riders or Cyclists",Turning Without Due Care,3
+2018,FATAL,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,8
+2018,FATAL,"Drivers, Riders or Cyclists",Overtaking without Due Care,0
+2018,FATAL,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,0
+2018,FATAL,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,3
+2018,FATAL,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",12
+2018,INJURY,"Drivers, Riders or Cyclists",Failing to Keep a Proper Lookout,1964
+2018,INJURY,"Drivers, Riders or Cyclists",Failing to Have Proper Control,704
+2018,INJURY,"Drivers, Riders or Cyclists",Failing to Give Way to Traffic with Right of Way,584
+2018,INJURY,"Drivers, Riders or Cyclists",Changing Lane without Due Care,355
+2018,INJURY,"Drivers, Riders or Cyclists",Disobeying Traffic Light Signals Resulting in Accidents with Vehicle,108
+2018,INJURY,"Drivers, Riders or Cyclists",Turning Without Due Care,167
+2018,INJURY,"Drivers, Riders or Cyclists",Driving under the Influence of Alcohol,155
+2018,INJURY,"Drivers, Riders or Cyclists",Overtaking without Due Care,72
+2018,INJURY,"Drivers, Riders or Cyclists",Following Too Close to Vehicle In Front,14
+2018,INJURY,"Drivers, Riders or Cyclists",Turning Vehicle & Failing to Give Way to Pedestrian During Green Man,86
+2018,INJURY,"Drivers, Riders or Cyclists","Other causes attributed to drivers, riders or pedal cyclists",365
+2018,FATAL,Pedestrians,Crossing Heedless of Traffic,5
+2018,FATAL,Pedestrians,Failing to Use Available Pedestrian Crossing,3
+2018,FATAL,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,2
+2018,FATAL,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,0
+2018,FATAL,Pedestrians,Playing on The Road or Carpark,0
+2018,FATAL,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,0
+2018,FATAL,Pedestrians,Under the Influence of Alcohol,0
+2018,FATAL,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2018,FATAL,Pedestrians,Using PMD to Travel on Road,0
+2018,FATAL,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,4
+2018,INJURY,Pedestrians,Crossing Heedless of Traffic,61
+2018,INJURY,Pedestrians,Failing to Use Available Pedestrian Crossing,39
+2018,INJURY,Pedestrians,Crossing Within Pedestrian Crossing When Red Man Lighted,56
+2018,INJURY,Pedestrians,Crossing In Front or Behind a Vehicle which Obstructs View,53
+2018,INJURY,Pedestrians,Playing on The Road or Carpark,0
+2018,INJURY,Pedestrians,Carrying Out Work on the Road without Proper Attire or Sufficient Warning Signs,3
+2018,INJURY,Pedestrians,Under the Influence of Alcohol,4
+2018,INJURY,Pedestrians,Under the Influence of Drugs/Intoxicated Substance,0
+2018,INJURY,Pedestrians,Using PMD to Travel on Road,19
+2018,INJURY,Pedestrians,Other Causes of Accidents Attributed to Pedestrians,78
+2018,FATAL,NA,Causes Attributed to Vehicles,0
+2018,INJURY,NA,Causes Attributed to Vehicles,9
+2018,FATAL,NA,Causes Attributed to Road Conditions,0
+2018,INJURY,NA,Causes Attributed to Road Conditions,1
+2018,FATAL,NA,Other Causes,0
+2018,INJURY,NA,Other Causes,49
