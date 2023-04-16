@@ -5,7 +5,7 @@ library(shiny)
 crowdingTabContent <- conditionalPanel(
     condition = "input.othersTab === 'crowding'",
     strong("Bus Crowding Plot"),
-    plotOutput("busCrowdingPlot", width = "600px", height = "400px"),
+    plotOutput("busCrowdingPlot", height = "400px"),
     p(
         "Buses are the most crowded from 7am to 8am and 5pm to 6pm on weekdays.
         Buses are consistently crowded throughout the day on weekends especially
@@ -14,7 +14,7 @@ crowdingTabContent <- conditionalPanel(
     ),
     br(),
     strong("MRT Crowding Plot"),
-    plotOutput("mrtCrowdingPlot", width = "600px", height = "400px"),
+    plotOutput("mrtCrowdingPlot", height = "400px"),
     p(
         "MRT is the most crowded from 7am to 8am and 5pm to 6pm on weekdays.
         MRT is consistently crowded throughout the day on weekends but you will
@@ -34,6 +34,7 @@ updateCrowdingTab <- function(input, output) {
             geom_bar(stat = "identity", position = "dodge") +
             facet_wrap(~DAY_TYPE, nrow = 2) +
             labs(x = "Time in hour", y = "Total tap in volume") +
+            theme(legend.position = "bottom") +
             scale_x_continuous(breaks = seq(0, 23, 1)) +
             scale_y_continuous(labels = scales::comma)
 
@@ -51,6 +52,7 @@ updateCrowdingTab <- function(input, output) {
             geom_bar(stat = "identity", position = "dodge") +
             facet_wrap(~DAY_TYPE, nrow = 2) +
             labs(x = "Time in hour", y = "Total tap in volume") +
+            theme(legend.position = "bottom") +
             scale_x_continuous(breaks = seq(0, 23, 1)) +
             scale_y_continuous(labels = scales::comma)
 
