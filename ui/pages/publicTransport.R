@@ -19,7 +19,7 @@ getPublicTransportDirectionsBetweenPostalCodes <- function(fromPostalCode, toPos
     ))
 
     result <- result$itineraries
-    result$legs <- lapply(result$legs, function(legs_list) {
+    result$waypoints <- lapply(result$legs, function(legs_list) {
         do.call(rbind, legs_list$waypoints) %>%
             points_to_lines() %>%
             toJSON(auto_unbox = TRUE)
@@ -58,7 +58,7 @@ updatePublicTransportTab <- function(input, output) {
             map <- map %>%
                 add_line_layer(
                     id = layer_id,
-                    source = data$legs[[i]] %>% as_mapbox_source(),
+                    source = data$waypoints[[i]] %>% as_mapbox_source(),
                     line_color = data$colors[[i]],
                     line_opacity = 0.4,
                     line_dasharray = c(3, i * 0.5),
