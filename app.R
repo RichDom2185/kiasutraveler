@@ -1,6 +1,7 @@
 library(shiny)
 library(shinyjs)
 library(shinyTime)
+library(leaflet)
 library(mapboxer)
 
 source("api/functions.R")
@@ -21,7 +22,18 @@ ui <- app(
     useShinyjs(),
     setDefaultTab("activeTab", "home"),
     stackElements(
-        mapboxerOutput("map", height = "100vh"),
+        ##### FIXME: Start of hacky section #########
+        # TODO: Combine to mapbox
+        setDefaultTab("mapProvider", "mapbox"),
+        conditionalPanel(
+            condition = "input.mapProvider === 'mapbox'",
+            mapboxerOutput("map", height = "100vh")
+        ),
+        conditionalPanel(
+            condition = "input.mapProvider === 'leaflet'",
+            leafletOutput("leafletMap", height = "100vh")
+        ),
+        ##### FIXME: End of hacky section #########
         column(
             box(
                 style = "width: fit-content; position: absolute; top: 0; left: 0;",
