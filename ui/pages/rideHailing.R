@@ -3,8 +3,8 @@ library(shiny)
 ## FUNCTIONS
 
 getServicesBetweenPostalCodes <- function(fromPostalCode, toPostalCode) {
-    fromLocation <- getCoordinatesFromAddress(fromPostalCode)[[1]]
-    toLocation <- getCoordinatesFromAddress(toPostalCode)[[1]]
+    fromLocation <- getCoordinatesFromAddress(fromPostalCode)$results[1, ]
+    toLocation <- getCoordinatesFromAddress(toPostalCode)$results[1, ]
 
     result <- do.call(getGrabServicesAvailability, list(
         fromLocation$lat,
