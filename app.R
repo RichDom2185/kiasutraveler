@@ -62,6 +62,23 @@ ui <- app(
                 publicTransportTabContent,
                 othersTabContent
             )
+        ),
+        ##### FIXME: Start of hacky section #########
+        # TODO: Refactor
+        tags$div(
+            id = "modalOverlay",
+            # FIXME: For some reason removing is-active prevents the modal from updating
+            class = "modal is-active",
+            tags$div(class = "modal-background"),
+            tags$div(
+                class = "modal-content pt-3 px-4",
+                tableOutput("modalContentBody")
+            ),
+            tags$button(
+                class = "modal-close is-large",
+                onclick = "$('#modalOverlay').removeClass('is-active');"
+            )
+            ##### FIXME: End of hacky section #########
         )
     )
 )

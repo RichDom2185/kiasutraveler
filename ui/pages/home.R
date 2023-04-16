@@ -53,7 +53,8 @@ homeTabContent <- conditionalPanel(
     ),
     actionButton("runButton", "Take me there!", class = "button is-light is-fullwidth"),
     br(),
-    htmlOutput("homeDescription")
+    htmlOutput("homeDescription"),
+    uiOutput("homeComparisonTable")
 )
 
 updateHomeTab <- function(input, output) {
@@ -118,6 +119,24 @@ updateHomeTab <- function(input, output) {
                     # FIXME: This should be a separate function
                     withProgress(message = "Getting directions...", {
                         result <- getDirectionsBetweenPostalCodes(pickUp, dropOff)
+                        ##### FIXME: Start of hacky section #########
+                        modalData$"Driving" <- result$waypoints %>%
+                            geosphere::distGeo() %>%
+                            sum(na.rm = TRUE) %>%
+                            "/"(1000) %>%
+                            round(2) %>%
+                            paste("km")
+                        modalData$"Public Transport" <- getPublicTransportDirectionsBetweenPostalCodes(pickUp, dropOff)$legs %>%
+                            lapply(function(legs_list) {
+                                do.call(rbind, legs_list$waypoints) %>%
+                                    geosphere::distGeo() %>%
+                                    sum(na.rm = TRUE)
+                            }) %>%
+                            range() %>%
+                            "/"(1000) %>%
+                            round(2) %>%
+                            paste("km", collapse = "-")
+                        ##### FIXME: End of hacky section #########
                         waypoints(result$waypoints)
                     })
                     # Actual text
@@ -131,4 +150,56 @@ updateHomeTab <- function(input, output) {
             )
         )
     })
+    ##### FIXME: Start of hacky section #########
+    output$homeComparisonTable <- renderUI({
+        pickUp <- isolate(input$pickUp)
+        dropOff <- isolate(input$dropOff)
+
+        # FIXME: For some reason, combining the conditions using && doesn't work
+        if (input$runButton > 0) {
+            if (isValidPostalCode(pickUp)) {
+                if (isValidPostalCode(dropOff)) {
+                    # TODO: Refactor
+                    tags$button(
+                        id = "showComparisonTableButton",
+                        class = "button is-light is-fullwidth",
+                        onclick = "$('#modalOverlay').addClass('is-active');",
+                        "View summary comparison",
+                        # TODO: Add nbsp
+                        icon("arrow-right")
+                    )
+                }
+            }
+        }
+    })
+
+    modalData <- reactiveValues()
+
+    observeEvent(input$runButton, {
+        output$modalContentBody <- renderTable(
+            width = "100%",
+            {
+                data <- modalData
+                elements <- data %>%
+                    reactiveValuesToList() %>%
+                    isolate()
+
+                # print(elements %>% data.frame() %>% t())
+                df <- elements %>%
+                    data.frame() %>%
+                    t() %>%
+                    data.frame()
+
+                print(df)
+
+                # FIXME: Remove hardcoding
+                if (ncol(df) > 0) {
+                    colnames(df)[1] <- "Distance"
+                    df$"Service" <- row.names(df)
+                    df[, c("Service", "Distance")]
+                }
+            }
+        )
+    })
+    ##### FIXME: End of hacky section #########
 }
