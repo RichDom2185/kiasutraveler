@@ -4,7 +4,9 @@ library(shiny)
 
 crowdingTabContent <- conditionalPanel(
     condition = "input.othersTab === 'crowding'",
+    p("Bus Crowding Plot"),
     plotOutput("busCrowdingPlot", width = "600px", height = "400px"),
+    p("MRT Crowding Plot"),
     plotOutput("mrtCrowdingPlot", width = "600px", height = "400px")
 )
 
