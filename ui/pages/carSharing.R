@@ -18,6 +18,7 @@ updateCarSharingTab <- function(input, output) {
         ) %>%
             add_navigation_control(pos = "bottom-left") %>%
             add_circle_layer(
+                id = "getgo-layer",
                 source = getAvailableGetgoVehicles()$data %>% as_mapbox_source(),
                 popup = paste0(
                     strong("{{vehicleName}}"),
@@ -26,6 +27,17 @@ updateCarSharingTab <- function(input, output) {
                     "<br>Capacity: {{capacity}}"
                 ),
                 circle_color = "red",
+                circle_radius = 5
+            ) %>%
+            add_circle_layer(
+                id = "bluesg-layer",
+                source = getAvailableBluesgStations()$stations %>%
+                    filter(numCars > 0) %>%
+                    as_mapbox_source(),
+                popup = paste0(
+                    strong("{{numCars}} available")
+                ),
+                circle_color = "blue",
                 circle_radius = 5
             )
     })
