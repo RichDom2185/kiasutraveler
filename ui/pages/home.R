@@ -40,6 +40,13 @@ homeTabContent <- conditionalPanel(
     condition = "input.activeTab === 'home'",
     p("Welcome to kiasutraveler! Where would you like to go today?"),
     br(),
+    p(em(
+        strong("Note:"),
+        "If you encounter any errors in this app, please come
+        back to the home page, key in known VALID postal codes,
+        and press the 'Take me there!' button again."
+    )),
+    br(),
     columns(
         column(input.text("pickUp", "Enter postal code...", label = "Pick-up from:")),
         column(input.text("dropOff", "Enter postal code...", label = "Destination to:"))

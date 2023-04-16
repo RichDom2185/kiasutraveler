@@ -32,7 +32,13 @@ getPublicTransportDirectionsBetweenPostalCodes <- function(fromPostalCode, toPos
 
 publicTransportTabContent <- conditionalPanel(
     condition = "input.activeTab === 'publicTransport'",
-    p("PublicTransport content coming soon!")
+    p(
+        "The different coloured lines represent the different possible routes
+        via public transport between your selected start and end locations.
+        They may or may not include varying degrees of walking. Hover over
+        each route to view more detailed information such as the duration of
+        the journey, as well as the total fare."
+    )
 )
 
 updatePublicTransportTab <- function(input, output) {
@@ -64,6 +70,7 @@ updatePublicTransportTab <- function(input, output) {
                     line_dasharray = c(3, i * 0.5),
                     line_width = 5
                 ) %>%
+                # TODO: Add more information
                 add_tooltips(layer_id, paste0(
                     strong(paste("Route Option", i)),
                     br(),

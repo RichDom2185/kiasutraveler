@@ -2,7 +2,15 @@ library(shiny)
 
 carSharingTabContent <- conditionalPanel(
     condition = "input.activeTab === 'carSharing'",
-    p("CarSharing content coming soon!")
+    p(
+        "Each red point on the map represents a GetGo vehicle that is
+        available for booking, while each blue point represents a BlueSG
+        station that has cars available for booking."
+    ),
+    br(),
+    p(
+        "Hover over the points to view more information about each of them."
+    )
 )
 
 updateCarSharingTab <- function(input, output) {
@@ -25,6 +33,7 @@ updateCarSharingTab <- function(input, output) {
                 circle_radius = 5
             ) %>%
             add_tooltips("getgo-layer", paste0(
+                # TODO: More information (e.g. price per km)
                 strong("{{vehicleName}}"),
                 br(),
                 em("GetGo ({{vehicleNo}})"),
