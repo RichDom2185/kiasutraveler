@@ -79,7 +79,7 @@ updateHomeTab <- function(input, output) {
                     popup = paste0(
                         strong("Start location:"),
                         br(),
-                        getCoordinatesFromAddress(isolate(input$pickUp))[[1]]$name
+                        getCoordinatesFromAddress(isolate(input$pickUp))$results[1, ]$name
                     )
                 ) %>%
                 add_marker(
@@ -88,7 +88,7 @@ updateHomeTab <- function(input, output) {
                     popup = paste0(
                         strong("End location:"),
                         br(),
-                        getCoordinatesFromAddress(isolate(input$dropOff))[[1]]$name
+                        getCoordinatesFromAddress(isolate(input$dropOff))$results[1, ]$name
                     )
                 )
         } else {
