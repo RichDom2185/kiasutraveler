@@ -13,19 +13,36 @@ app <- function(...) {
 
 
 # Simple Bulma wrappers
-appTitle <- function(...) p(class = "title", ...)
-box <- function(..., class = "") div(class = paste("box my-5 mx-4", class), ...)
-columns <- function(...) div(class = "columns", ...)
-column <- function(...) div(class = "column", ...)
-
-
-tabs <- function(id, ..., class = "") {
-    div(class = paste("tabs is-toggle is-centered", class), tags$ul(id = id, ...))
+appTitle <- function(..., class = "") {
+    p(class = paste("title", class), ...)
 }
+box <- function(..., class = "") {
+    div(class = paste("box my-5 mx-4", class), ...)
+}
+columns <- function(..., class = "") {
+    div(class = paste("columns", class), ...)
+}
+column <- function(..., class = "") {
+    div(class = paste("column", class), ...)
+}
+
+
+tabs <- function(selector, ..., class = "") {
+    # Internal function in order to access parent environment
+    tab <- function(id, title, class = "", ...) {
+        tags$li(id = id, class = class, a(
+            onClick = paste0("Shiny.setInputValue('", selector, "', '", id, "')"), title, ...
+        ))
+    }
+
+    div(
+        class = paste("tabs is-toggle is-centered", class),
+        tags$ul(id = selector, lapply(list(...), function(args) do.call(tab, args)))
+    )
+}
+
 tab <- function(id, title, class = "", ...) {
-    tags$li(id = id, class = class, a(
-        onClick = paste0("Shiny.setInputValue('activeTab', '", id, "')"), title, ...
-    ))
+    list(id, title, class, ...)
 }
 
 appTabs <- function(id, ..., selected = 1) {
@@ -44,6 +61,7 @@ appTabs <- function(id, ..., selected = 1) {
             )
         }),
         useShinyjs(),
+        # TODO: Remove this old unused code
         HTML("<script defer>
         $(document).on('shiny:connected', function() {
             Shiny.setInputValue('activeTab', 'tab_1');

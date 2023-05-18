@@ -22,6 +22,21 @@ setApiMode <- function(type) {
 
 globals.api_handle_url <- setApiMode("auto")
 
+##########################################
+# Using API_ENDPOINT_CARS_AVAILABILITY_URL
+##########################################
+getAvailableBluesgStations <- function() {
+    url <- API_ENDPOINT_CARS_AVAILABILITY_URL
+    params <- list(serviceType = "bluesg")
+    globals.api_handle_url(modify_url(url, query = params))
+}
+
+getAvailableGetgoVehicles <- function() {
+    url <- API_ENDPOINT_CARS_AVAILABILITY_URL
+    params <- list(serviceType = "getgo")
+    globals.api_handle_url(modify_url(url, query = params))
+}
+
 
 ##########################################
 # Using API_ENDPOINT_FORWARD_GEOCODE_URL
@@ -140,8 +155,7 @@ getBusPassengerDensity <- function() {
     params <- list(
         type = "bus"
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
 }
 
 # FIXME: `time` parameter is not used yet
@@ -151,6 +165,39 @@ getMrtPlatformDensity <- function(mrtLine, time) {
         type = "platform",
         mrt = mrtLine
     )
-    response <- GET(url, query = params)
-    content(response)
+    globals.api_handle_url(modify_url(url, query = params))
+}
+
+
+##########################################
+# Using API_ENDPOINT_RAINFALL_DATA_URL
+##########################################
+getRainfall <- function(date = NULL, time = NULL) {
+    # Using default argument values to suport both
+    # realtime data and historical data
+    url <- API_ENDPOINT_RAINFALL_DATA_URL
+    if (!is.null(date)) {
+        url <- modify_url(url, query = list(date = date))
+    }
+    if (!is.null(time)) {
+        url <- modify_url(url, query = list(time = time))
+    }
+    globals.api_handle_url(url)
+}
+
+
+##########################################
+# Using API_ENDPOINT_WEATHER_FORECAST_URL
+##########################################
+getWeatherForecast <- function(date = NULL, time = NULL) {
+    # Using default argument values to suport both
+    # realtime data and historical data
+    url <- API_ENDPOINT_WEATHER_FORECAST_URL
+    if (!is.null(date)) {
+        url <- modify_url(url, query = list(date = date))
+    }
+    if (!is.null(time)) {
+        url <- modify_url(url, query = list(time = time))
+    }
+    globals.api_handle_url(url)
 }
