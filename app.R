@@ -26,40 +26,40 @@ source("ui/pages/others.R")
 options(shiny.autoreload = TRUE)
 
 ui <- app(
-  useShinyjs(),
-  setDefaultTab("activeTab", "home"),
-  stackElements(
-    mapboxerOutput("map", height = "100vh"),
-    column(
-      box(
-        style = "width: fit-content; position: absolute; top: 0; left: 0;",
-        appTitle("kiasutraveler")
-      ),
-      box(
-        style = "width: fit-content; position: absolute; right: 0; top: 0",
-        class = "py-3 px-3",
-        tabs(
-          "activeTab",
-          tab("home", "Home"),
-          tab("rideHailing", "Ride Hailing"),
-          tab("carSharing", "Car-Sharing"),
-          tab("taxi", "Taxi"),
-          tab("publicTransport", "Public Transport"),
-          tab("others", "Others")
+    useShinyjs(),
+    setDefaultTab("activeTab", "home"),
+    stackElements(
+        mapboxerOutput("map", height = "100vh"),
+        column(
+            box(
+                style = "width: fit-content; position: absolute; top: 0; left: 0;",
+                appTitle("kiasutraveler")
+            ),
+            box(
+                style = "width: fit-content; position: absolute; right: 0; top: 0",
+                class = "py-3 px-3",
+                tabs(
+                    "activeTab",
+                    tab("home", "Home"),
+                    tab("rideHailing", "Ride Hailing"),
+                    tab("carSharing", "Car-Sharing"),
+                    tab("taxi", "Taxi"),
+                    tab("publicTransport", "Public Transport"),
+                    tab("others", "Others")
+                )
+            ),
+            box(
+                # TODO: Remove max-height and overflow-y hotfix
+                style = "width: fit-content; position: absolute; bottom: 0; right: 0; max-height: 40vh; overflow-y: auto",
+                homeTabContent,
+                rideHailingTabContent,
+                carSharingTabContent,
+                taxiTabContent,
+                publicTransportTabContent,
+                othersTabContent
+            )
         )
-      ),
-      box(
-        # TODO: Remove max-height and overflow-y hotfix
-        style = "width: fit-content; position: absolute; bottom: 0; right: 0; max-height: 40vh; overflow-y: auto",
-        homeTabContent,
-        rideHailingTabContent,
-        carSharingTabContent,
-        taxiTabContent,
-        publicTransportTabContent,
-        othersTabContent
-      )
     )
-  )
 )
 
 server <- function(input, output) {
